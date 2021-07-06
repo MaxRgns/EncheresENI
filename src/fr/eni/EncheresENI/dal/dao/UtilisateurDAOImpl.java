@@ -15,27 +15,28 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	private static final String INSERT = "INSERT INTO UTILISATEURS VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String UPDATE = "UPDATE contact SET nom=?, prenom=?, tel=? WHERE idContact=?";
 	
 	@Override
-	public void insert(Utilisateur object) {
+	public void insert(Utilisateur user) {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,object.getPseudo());
-			stmt.setString(2,object.getNom());
-			stmt.setString(3,object.getPrenom());
-			stmt.setString(4,object.getEmail());
-			stmt.setString(5,object.getTelephone());
-			stmt.setString(6,object.getRue());
-			stmt.setString(7,object.getCodepostal());
-			stmt.setString(8,object.getVille());
-			stmt.setString(9,object.getMotDePasse());
-			stmt.setString(10,Double.toString(object.getCredit()));
-			stmt.setString(11,Boolean.toString(object.isAdministrateur()));
+			stmt.setString(1,user.getPseudo());
+			stmt.setString(2,user.getNom());
+			stmt.setString(3,user.getPrenom());
+			stmt.setString(4,user.getEmail());
+			stmt.setString(5,user.getTelephone());
+			stmt.setString(6,user.getRue());
+			stmt.setString(7,user.getCodepostal());
+			stmt.setString(8,user.getVille());
+			stmt.setString(9,user.getMotDePasse());
+			stmt.setString(10,Double.toString(user.getCredit()));
+			stmt.setString(11,Boolean.toString(user.isAdministrateur()));
 			int nb = stmt.executeUpdate();
 			if(nb>0) { //Si la requête a bien récupérée une clé, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
 				if(rsk.next()) {
-					object.setNoUtilisateur(rsk.getInt(1));
+					user.setNoUtilisateur(rsk.getInt(1));
 				}
 			}
 		}catch (SQLException e){
@@ -104,6 +105,23 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 
 	@Override
 	public void update(Utilisateur object) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement stmt = connection.prepareStatement(UPDATE);
+			stmt.setString(1,object.getPseudo());
+			stmt.setString(2,object.getNom());
+			stmt.setString(3,object.getPrenom());
+			stmt.setString(4,object.getEmail());
+			stmt.setString(5,object.getTelephone());
+			stmt.setString(6,object.getRue());
+			stmt.setString(7,object.getCodepostal());
+			stmt.setString(8,object.getVille());
+			stmt.setString(9,object.getMotDePasse());
+			stmt.setString(10,Double.toString(object.getCredit()));
+			stmt.setString(11,Boolean.toString(object.isAdministrateur()));
+			
+		}catch (SQLException e){
+			System.err.println("Probleme d'accès à la base de données");
+		}
 		// TODO Auto-generated method stub
 		
 	}
