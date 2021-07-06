@@ -15,16 +15,15 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private Double credit;
-	private boolean administrateur; 
+	private boolean administrateur;
 	private List<ArticleVendu> ventes = new ArrayList<>();
 	private List<Enchere> lstEncheres = new ArrayList<>();
-	
+
 	public Utilisateur() {
 	}
-
+	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codepostal, String ville, String motDePasse, Double credit, boolean administrateur,
-			List<ArticleVendu> lstArticles) {
+			String codepostal, String ville, String motDePasse) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -35,14 +34,12 @@ public class Utilisateur {
 		this.codepostal = codepostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
-		this.ventes = lstArticles;
+		this.credit = 100.0; // un crédit de base à la création du compte
+		this.administrateur = false; // par défaut, un utilisateur n'est pas admin
 	}
 
 	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codepostal, String ville, String motDePasse, Double credit, boolean administrateur,
-			List<ArticleVendu> lstArticles) {
+			String rue, String codepostal, String ville, String motDePasse) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -54,9 +51,8 @@ public class Utilisateur {
 		this.codepostal = codepostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
-		this.ventes = lstArticles;
+		this.credit = 100.0; // un crédit de base à la création du compte
+		this.administrateur = false; // par défaut, un utilisateur n'est pas admin
 	}
 
 	public Integer getNoUtilisateur() {
@@ -150,34 +146,17 @@ public class Utilisateur {
 	public boolean isAdministrateur() {
 		return administrateur;
 	}
-
+	
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
-
-	public List<ArticleVendu> getLstArticles() {
-		return ventes;
-	}
-
-	public void setLstArticles(List<ArticleVendu> lstArticles) {
-		this.ventes = lstArticles;
-	}
-	
 
 	public List<ArticleVendu> getVentes() {
 		return ventes;
 	}
 
-	public void setVentes(List<ArticleVendu> ventes) {
-		this.ventes = ventes;
-	}
-
 	public List<Enchere> getLstEncheres() {
 		return lstEncheres;
-	}
-
-	public void setLstEncheres(List<Enchere> lstEncheres) {
-		this.lstEncheres = lstEncheres;
 	}
 
 	@Override
@@ -187,5 +166,5 @@ public class Utilisateur {
 				+ codepostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", ventes=" + ventes + ", lstEncheres=" + lstEncheres + "]";
 	}
-	
+
 }

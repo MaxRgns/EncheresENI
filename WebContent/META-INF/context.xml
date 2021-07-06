@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource  name="jdbc/contactDb"  
+    		  
+    		  driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    		  type="javax.sql.DataSource"
+    		  
+    		  url="jdbc:sqlserver://127.0.0.1:1434;databasename=ENCHERES"
+              username="sa"  
+              password="Pa$$w0rd"  
+    
+              maxActive="20" 
+              maxIdle="10"  
+              maxWait="100000"
+             />
+              
+              
+ </Context>
