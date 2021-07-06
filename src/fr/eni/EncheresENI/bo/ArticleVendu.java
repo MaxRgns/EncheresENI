@@ -12,7 +12,7 @@ public class ArticleVendu {
 	private String categorie;
 	private Double miseAPrix;
 	private Double prixVente;
-	private String etatvente;
+	private String etatVente;
 	private Utilisateur vendeur;
 	private List<Enchere> lstEncheres;
 	private Retrait lieuRetrait;
@@ -32,7 +32,7 @@ public class ArticleVendu {
 		this.categorie = categorie;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
-		this.etatvente = etatvente;
+		this.etatVente = etatvente;
 		this.vendeur = vendeur;
 		this.lstEncheres = lstEncheres;
 		this.lieuRetrait = lieuRetrait;
@@ -51,7 +51,7 @@ public class ArticleVendu {
 		this.categorie = categorie;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
-		this.etatvente = etatvente;
+		this.etatVente = etatvente;
 		this.vendeur = vendeur;
 		this.lstEncheres = lstEncheres;
 		this.lieuRetrait = lieuRetrait;
@@ -123,11 +123,11 @@ public class ArticleVendu {
 	}
 
 	public String getEtatvente() {
-		return etatvente;
+		return etatVente;
 	}
 
 	public void setEtatvente(String etatvente) {
-		this.etatvente = etatvente;
+		this.etatVente = etatvente;
 	}
 
 	public Utilisateur getVendeur() {
@@ -166,7 +166,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", categorie="
-				+ categorie + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatvente=" + etatvente
+				+ categorie + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatvente=" + etatVente
 				+ ", vendeur=" + vendeur + ", lstEncheres=" + lstEncheres + ", lieuRetrait=" + lieuRetrait
 				+ ", categorieArticle=" + categorieArticle + "]";
 		//TODO Vérifier si problème StackOverflow (boucle infinie)
