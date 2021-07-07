@@ -6,5 +6,6 @@ import fr.eni.EncheresENI.bo.Utilisateur;
 
 public interface UtilisateurManager {
 	public void add(Utilisateur u) throws BLLException;
-	public List<Utilisateur> getUser();
+	public List<Utilisateur> getUsers();
+	public Utilisateur getProfil(Integer id);
 }

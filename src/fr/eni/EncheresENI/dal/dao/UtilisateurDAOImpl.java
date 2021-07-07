@@ -48,6 +48,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	public Utilisateur selectById(Integer id) {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID);
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			rs.next(); //Passage à la première (et dernière) ligne du résultat de requête
 			Utilisateur u = new Utilisateur();

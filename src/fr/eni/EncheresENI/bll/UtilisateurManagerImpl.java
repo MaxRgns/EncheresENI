@@ -48,11 +48,26 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public List<Utilisateur> getUser() {
+	public List<Utilisateur> getUsers() {
 		if (lstUser == null) {
 			lstUser = dao.selectAll();
 		}
 		return lstUser;
+	}
+	@Override
+	public Utilisateur getProfil(Integer id) {
+		Utilisateur retour = null;
+		try {
+			retour = dao.selectById(id);
+		} catch (Exception e) {
+			System.err.println("Pas trouvé l'id");//TODO Modifier ça
+		}
+		//Passage de certains paramètres inutiles POUR LA COPIE à null
+		retour.setMotDePasse(null); 
+		retour.setCredit(null);
+		retour.setAdministrateur(false);
+		//TODO Mettre l'id à null ?
+		return retour;
 	}
 
 }
