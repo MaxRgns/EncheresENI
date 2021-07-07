@@ -12,6 +12,4 @@ public class ProfilModel {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
-	
 }

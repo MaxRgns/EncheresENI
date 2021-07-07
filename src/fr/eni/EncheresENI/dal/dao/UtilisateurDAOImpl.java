@@ -45,7 +45,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	}
 
 	@Override
-	public Utilisateur selectById(Integer id) {
+	public Utilisateur selectById(Integer id) throws SQLException {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID);
 			stmt.setInt(1, id);
@@ -67,10 +67,8 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			//TODO recupérer les ventes et enchères et les lier au compte
 			return u;
 		}catch (SQLException e){
-			System.err.println("Probleme d'accès à la base de données");
+			throw new SQLException("Probleme d'accès à la base de données");
 		}
-		
-		return null;
 	}
 
 	@Override
