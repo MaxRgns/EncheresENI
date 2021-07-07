@@ -34,7 +34,7 @@ public class ProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Note : ce servlet est supposé être appelé avec un idProfil correspondant à celui du profil que l'utilisateur veut consulter.
 		// S'il n'y a pas d'identifiant de renseigné, l'utilisateur sera renvoyé en page d'accueil
-		
+		//TODO Vérifier la session avant de permettre l'accès aux infos
 		//TODO tout passer en POST (supprimer le doGet et transférer le contenu dans la méthode doPost)
 		if (request.getParameter("idProfil") != null) {
 			//Si un identifiant a permis d'accéder à cette page, on l'utilise pour récupérer les informations sur le profil recherché
@@ -55,7 +55,7 @@ public class ProfilServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/Profil.jsp").forward(request, response);
 		}else{
 			//Si l'utilisateur n'a pas entré un identifiant valide, le servlet le renvoie à l'accueil
-			request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);//TODO Vérifier lien vers Accueil
+			request.getRequestDispatcher("AccueilServlet").forward(request, response);//TODO Vérifier lien vers Accueil
 		}
 		
 	}
