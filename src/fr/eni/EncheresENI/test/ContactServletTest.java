@@ -1,4 +1,4 @@
-package fr.eni.EncheresENI.ihm;
+package fr.eni.EncheresENI.test;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,13 +15,13 @@ import fr.eni.EncheresENI.dal.ConnectionProvider;
  * Servlet implementation class ContactSrevletTest
  */
 @WebServlet("/ContactSrevletTest")
-public class ContactSrevletTest extends HttpServlet {
+public class ContactServletTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactSrevletTest() {
+    public ContactServletTest() {
      
         
     }

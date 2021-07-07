@@ -1,5 +1,6 @@
 package fr.eni.EncheresENI.ihm;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,4 +40,18 @@ public class ProfilModel {
 		return "UtilisateurModel [current=" + current + ", lstUtilisateurs=" + lstUtilisateurs + "]";
 	}
 	
+=======
+import fr.eni.EncheresENI.bo.Utilisateur;
+
+public class ProfilModel {
+	private Utilisateur utilisateur;
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+>>>>>>> origin/dev
 }

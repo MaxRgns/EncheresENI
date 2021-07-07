@@ -1,4 +1,4 @@
-package fr.eni.EncheresENI.ihm;
+package fr.eni.EncheresENI.test;
 
 public class test {
 

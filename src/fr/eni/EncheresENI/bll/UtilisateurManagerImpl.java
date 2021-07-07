@@ -1,5 +1,6 @@
 package fr.eni.EncheresENI.bll;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +49,21 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public List<Utilisateur> getUser() {
+	public List<Utilisateur> getUsers() {
 		if (lstUser == null) {
 			lstUser = dao.selectAll();
 		}
 		return lstUser;
+	}
+	@Override
+	public Utilisateur getProfil(Integer id) throws BLLException, SQLException {
+		Utilisateur retour = null;
+		retour = dao.selectById(id);
+		//Passage de certains paramètres inutiles POUR LA COPIE à null
+		retour.setMotDePasse(null); 
+		retour.setCredit(null);
+		retour.setAdministrateur(false);
+		return retour;
 	}
 
 }
