@@ -9,7 +9,7 @@ import fr.eni.EncheresENI.dal.dao.DAO;
 import fr.eni.EncheresENI.dal.dao.DAOFact;
 
 class UtilisateurManagerImpl implements UtilisateurManager {
-	private List<Utilisateur> lstUser = new ArrayList<>();
+	private List<Utilisateur> lstUser = new ArrayList<>(); //TODO a virer
 	private DAO<Utilisateur> dao = DAOFact.getUtilisateurDAO();
 	
 	@Override
@@ -46,6 +46,26 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			}
 		}
 		return true; //Atteignable seulement s'il n'y a pas de doublons
+	}
+	
+	@Override
+	public Utilisateur getConnection(String ident, String password) {
+		List<Utilisateur> lstUser = dao.selectAll();
+		for (Utilisateur user : lstUser) {
+			if ((user.getPseudo().equals(ident)) || (user.getEmail().equals(ident))) {
+				//Si l'identifiant correspond au pseudo ou email de l'utilisateur
+				if (user.getMotDePasse().equals(password)) {
+					System.out.println("ça fonctionne");
+					//Si c'est le bon mot de passe
+					return user;
+				}else {
+					System.out.println("Mauvais mot de passe");
+				}
+			}else {
+				System.out.println("Utilisateur inexistant");
+			}
+		}
+		return null;
 	}
 
 	@Override

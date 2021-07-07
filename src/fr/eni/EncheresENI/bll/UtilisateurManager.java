@@ -9,4 +9,5 @@ public interface UtilisateurManager {
 	public void add(Utilisateur u) throws BLLException;
 	public List<Utilisateur> getUsers();
 	public Utilisateur getProfil(Integer id) throws BLLException, SQLException;
+	public Utilisateur getConnection(String ident, String password);
 }
