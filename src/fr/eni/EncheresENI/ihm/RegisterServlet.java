@@ -38,35 +38,35 @@ public class RegisterServlet extends HttpServlet {
 		ProfilModel model = new ProfilModel();
 		if (request.getParameter("register") == null) {
 			request.getRequestDispatcher("WEB-INF/Register.jsp").forward(request, response);
-		}
 
-		if (request.getParameter("register") != null) {
-			if (request.getParameter("mdp").equals(request.getParameter("conf"))) {
+			if (request.getParameter("register") != null) {
+				if (request.getParameter("mdp").equals(request.getParameter("conf"))) {
 
-				Utilisateur user = new Utilisateur();
+					Utilisateur user = new Utilisateur();
 
-				user.setPseudo(request.getParameter("pseudo"));
-				user.setNom(request.getParameter("nom"));
-				user.setPrenom(request.getParameter("prenom"));
-				user.setEmail(request.getParameter("mail"));
-				user.setTelephone(request.getParameter("tel"));
-				user.setRue(request.getParameter("rue"));
-				user.setCodepostal(request.getParameter("cp"));
-				user.setVille(request.getParameter("ville"));
-				user.setMotDePasse(request.getParameter("mdp"));
-				user.setCredit(100.0);
+					user.setPseudo(request.getParameter("pseudo"));
+					user.setNom(request.getParameter("nom"));
+					user.setPrenom(request.getParameter("prenom"));
+					user.setEmail(request.getParameter("mail"));
+					user.setTelephone(request.getParameter("tel"));
+					user.setRue(request.getParameter("rue"));
+					user.setCodepostal(request.getParameter("cp"));
+					user.setVille(request.getParameter("ville"));
+					user.setMotDePasse(request.getParameter("mdp"));
+					user.setCredit(100.0);
 
-				model.setUtilisateur(user);
-				System.out.println(user);
+					model.setUtilisateur(user);
+					System.out.println(user);
 
-				try {
-					manager.add(user);
-				} catch (BLLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					try {
+						manager.add(user);
+					} catch (BLLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("Mdp différents");
 				}
-			} else {
-				System.out.println("Mdp différents");
 			}
 		}
 

@@ -35,14 +35,14 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setString(10,Double.toString(user.getCredit()));
 			stmt.setString(11,Boolean.toString(user.isAdministrateur()));
 			int nb = stmt.executeUpdate();
-			if(nb>0) { //Si la requÃªte a bien rÃ©cupÃ©rÃ©e une clÃ©, on l'attribue au nouvel objet
+			if(nb>0) { //Si la requête a bien récupérée une clé, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
 				if(rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
 			}
 		}catch (SQLException e){
-			System.err.println("Probleme d'accès  la base de données");
+			System.err.println("Probleme d'accès à la base de données");
 		}
 	}
 
