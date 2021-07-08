@@ -55,7 +55,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			if ((user.getPseudo().equals(ident)) || (user.getEmail().equals(ident))) {
 				//Si l'identifiant correspond au pseudo ou email de l'utilisateur
 				if (user.getMotDePasse().equals(password)) {
-					System.out.println("Ã§a fonctionne");
+					System.out.println("ça fonctionne");
 					//Si c'est le bon mot de passe
 					return user;
 				}else {

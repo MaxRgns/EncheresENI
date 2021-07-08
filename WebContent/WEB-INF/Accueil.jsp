@@ -38,15 +38,15 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="" method="post">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Identifiant</label>
-                                        <input type="email" class="form-control" id="exampleInput">
+                                        <label for="exampleInputEmail1" class="form-label">Pseudo / eMail</label>
+                                        <input type="text" class="form-control" id="exampleInput">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
@@ -62,7 +62,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <a href="login.jsp"><button type="button" class="btn btn-secondary"
+                                <a href="/EncheresENI/Register.jsp"><button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">S'inscrire</button></a>
                                 <button type="submit" class="btn btn-primary">Se connecter</button>
                                 </form>
