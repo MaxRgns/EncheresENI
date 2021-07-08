@@ -27,13 +27,12 @@
 <title>ENI-Enchères</title>
 </head>
 <body>
-<div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-                <h1>ENI-Enchères</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				<h1>ENI-Enchères</h1>
 
-            </div>
-
+			</div>
 			<div class="offset-7 col-2">
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 					data-bs-target="#exampleModal">S'inscrire - Se connecter</button>

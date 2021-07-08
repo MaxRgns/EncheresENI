@@ -20,7 +20,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	
 	
 	@Override
-	public void insert(Utilisateur user) {
+	public Utilisateur insert(Utilisateur user) {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,user.getPseudo());
@@ -32,18 +32,20 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setString(7,user.getCodepostal());
 			stmt.setString(8,user.getVille());
 			stmt.setString(9,user.getMotDePasse());
-			stmt.setString(10,Double.toString(user.getCredit()));
-			stmt.setString(11,Boolean.toString(user.isAdministrateur()));
+			stmt.setDouble(10,user.getCredit());
+			stmt.setBoolean(11,user.isAdministrateur());
 			int nb = stmt.executeUpdate();
 			if(nb>0) { //Si la requête a bien récupérée une clé, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
 				if(rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
+				return user;
 			}
 		}catch (SQLException e){
 			System.err.println("Probleme d'accès à la base de données");
 		}
+		return null;
 	}
 
 	@Override
