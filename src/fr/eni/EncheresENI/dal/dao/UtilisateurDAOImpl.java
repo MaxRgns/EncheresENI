@@ -42,7 +42,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 				}
 			}
 		}catch (SQLException e){
-			System.err.println("Probleme d'acc�s�� la base de donn�es");
+			System.err.println("Probleme d'accès à la base de données");
 		}
 	}
 
@@ -117,20 +117,25 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setString(7,object.getCodepostal());
 			stmt.setString(8,object.getVille());
 			stmt.setString(9,object.getMotDePasse());
-			stmt.setString(10,Double.toString(object.getCredit()));
-			stmt.setString(11,Boolean.toString(object.isAdministrateur()));
+			stmt.setDouble(10,object.getCredit());
+			stmt.setBoolean(11,object.isAdministrateur());
 			
 		}catch (SQLException e){
 			System.err.println("Probleme d'accès à la base de données");
 		}
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Utilisateur object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Integer id) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement stmt = connection.prepareStatement(DELETE);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			
+		}catch (SQLException e){
+			System.err.println("Probleme d'accès à la base de données");
+		}
 	}
 
 }

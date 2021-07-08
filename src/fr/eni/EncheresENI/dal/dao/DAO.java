@@ -10,5 +10,5 @@ public interface DAO<T> {
 	public T selectById(Integer id) throws SQLException;
 	public List<T> selectAll();
 	public void update(T object);
-	public void delete(T object);
+	public void delete(Integer id);
 }

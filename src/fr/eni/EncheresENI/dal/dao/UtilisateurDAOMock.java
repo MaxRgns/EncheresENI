@@ -9,8 +9,8 @@ public class UtilisateurDAOMock implements DAO<Utilisateur> {
 	private List<Utilisateur> lstUtilMock = new ArrayList<>();
 	
 	@Override
-	public void insert(Utilisateur object) {
-		lstUtilMock.add(object);
+	public void insert(Utilisateur u) {
+		lstUtilMock.add(u);
 	}
 
 	@Override
@@ -29,15 +29,25 @@ public class UtilisateurDAOMock implements DAO<Utilisateur> {
 	}
 
 	@Override
-	public void update(Utilisateur object) {
-		// TODO Auto-generated method stub
-		
+	public void update(Utilisateur user) {
+		for (Utilisateur u : lstUtilMock) {
+			if (u.getNoUtilisateur() == user.getNoUtilisateur()) {
+				u = user;
+			}
+		}
 	}
 
 	@Override
-	public void delete(Utilisateur object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Integer id) {
+		int index = -1;
+		for (int i = 0; i < lstUtilMock.size(); i++) {
+			if (lstUtilMock.get(i).getNoUtilisateur() == id) {
+				index = i;
+			}
+		}
+		if (index > -1) {
+			lstUtilMock.remove(index);
+		}	
 	}
 
 }
