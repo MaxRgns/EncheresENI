@@ -20,7 +20,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	
 	
 	@Override
-	public Utilisateur insert(Utilisateur user) {
+	public void insert(Utilisateur user) {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,user.getPseudo());
@@ -35,17 +35,15 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setDouble(10,user.getCredit());
 			stmt.setBoolean(11,user.isAdministrateur());
 			int nb = stmt.executeUpdate();
-			if(nb>0) { //Si la requête a bien récupérée une clé, on l'attribue au nouvel objet
+			if(nb>0) { //Si la requï¿½te a bien rï¿½cupï¿½rï¿½e une clï¿½, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
 				if(rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
-				return user;
 			}
 		}catch (SQLException e){
-			System.err.println("Probleme d'accès à la base de données");
+			System.err.println("Probleme d'accÃ¨s Ã  la base de donnÃ©es");
 		}
-		return null;
 	}
 
 	@Override
@@ -119,20 +117,25 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setString(7,object.getCodepostal());
 			stmt.setString(8,object.getVille());
 			stmt.setString(9,object.getMotDePasse());
-			stmt.setString(10,Double.toString(object.getCredit()));
-			stmt.setString(11,Boolean.toString(object.isAdministrateur()));
+			stmt.setDouble(10,object.getCredit());
+			stmt.setBoolean(11,object.isAdministrateur());
 			
 		}catch (SQLException e){
 			System.err.println("Probleme d'accÃ¨s Ã  la base de donnÃ©es");
 		}
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Utilisateur object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Integer id) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement stmt = connection.prepareStatement(DELETE);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			
+		}catch (SQLException e){
+			System.err.println("Probleme d'accÃ¨s Ã  la base de donnÃ©es");
+		}
 	}
 
 }

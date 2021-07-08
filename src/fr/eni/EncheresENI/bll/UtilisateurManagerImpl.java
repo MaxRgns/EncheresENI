@@ -87,7 +87,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public void suppr(Utilisateur u) {
-		dao.delete(u);		
+		dao.delete(u.getNoUtilisateur());		
 	}
 
 }

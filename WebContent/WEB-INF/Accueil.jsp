@@ -34,6 +34,7 @@
 
 			</div>
 			<div class="offset-7 col-2">
+			<!-- Début session ?  -->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 					data-bs-target="#exampleModal">S'inscrire - Se connecter</button>
 				<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -76,7 +77,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> <!-- fin session -->
 
 		</div>
 		<div class="mx-auto" style="width: 300px;">
