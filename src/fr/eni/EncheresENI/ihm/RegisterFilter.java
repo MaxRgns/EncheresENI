@@ -21,14 +21,12 @@ public class RegisterFilter implements Filter {
      * Default constructor. 
      */
     public RegisterFilter() {
-    	
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		
 	}
 
 	/**
@@ -37,7 +35,7 @@ public class RegisterFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if (((HttpServletRequest) request).getSession().getAttribute("user") == null) {
 			//Si le visiteur n'est pas connecté à un compte utilisateur, il est renvoyé à la servlet login
-			request.getRequestDispatcher("LoginServlet").forward(request, response);
+			request.getRequestDispatcher("Login").forward(request, response);
 		} else {
 			chain.doFilter(request, response);
 		}
@@ -50,3 +48,4 @@ public class RegisterFilter implements Filter {
 	}
 
 }
+

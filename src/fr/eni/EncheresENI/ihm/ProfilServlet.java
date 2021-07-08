@@ -18,7 +18,7 @@ import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
 /**
  * Servlet implementation class ProfilServlet
  */
-@WebServlet("/ProfilServlet")
+@WebServlet("/Profil")
 public class ProfilServlet extends HttpServlet {
 
 	UtilisateurManager manager = UtilisateurManagerSingl.getInstance();
@@ -60,7 +60,7 @@ public class ProfilServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/Profil.jsp").forward(request, response);
 		}else{
 			//Si l'utilisateur n'a pas entré un identifiant valide, le servlet le renvoie à l'accueil
-			request.getRequestDispatcher("AccueilServlet").forward(request, response);//TODO Vérifier lien vers Accueil
+			request.getRequestDispatcher("Accueil").forward(request, response);//TODO Vérifier lien vers Accueil
 		}
 		
 

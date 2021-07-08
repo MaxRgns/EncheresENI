@@ -1,6 +1,7 @@
 package fr.eni.EncheresENI.test;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -14,14 +15,14 @@ import fr.eni.EncheresENI.dal.ConnectionProvider;
 /**
  * Servlet implementation class ContactSrevletTest
  */
-@WebServlet("/ContactSrevletTest")
-public class ContactServletTest extends HttpServlet {
+@WebServlet("/TestConnection")
+public class TestConnectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactServletTest() {
+    public TestConnectionServlet() {
      
         
     }
@@ -30,10 +31,11 @@ public class ContactServletTest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			System.out.println(ConnectionProvider.getConnection());
+		//Cette servlet sert pour tester si la connection à la base de données paramêtrée dans context.xml se fait.		
+		try (Connection connect = ConnectionProvider.getConnection()){
+			response.getWriter().append("Connexion à la base de données établie");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			response.getWriter().append("Erreur de connexion à la base de données");
 		}
 	}
 

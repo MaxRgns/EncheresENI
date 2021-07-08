@@ -15,7 +15,9 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	private static final String INSERT = "INSERT INTO UTILISATEURS VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String UPDATE = "UPDATE contact SET nom=?, prenom=?, tel=? WHERE idContact=?";
+	private static final String UPDATE = "UPDATE UTILISATEURS SET nom=?, prenom=?, tel=? WHERE no_utilisateur = ?"; //TODO A adapter à la BDD
+	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	
 	
 	@Override
 	public void insert(Utilisateur user) {

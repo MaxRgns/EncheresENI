@@ -1,3 +1,4 @@
+
 package fr.eni.EncheresENI.ihm;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AccueilServlet
  */
-@WebServlet("/AccueilServlet")
+@WebServlet("/Accueil")
 public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +27,7 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("./WEB-INF/Accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,3 +39,4 @@ public class AccueilServlet extends HttpServlet {
 	}
 
 }
+

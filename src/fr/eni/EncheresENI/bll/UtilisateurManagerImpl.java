@@ -9,7 +9,6 @@ import fr.eni.EncheresENI.dal.dao.DAO;
 import fr.eni.EncheresENI.dal.dao.DAOFact;
 
 class UtilisateurManagerImpl implements UtilisateurManager {
-	private List<Utilisateur> lstUser = new ArrayList<>(); //TODO a virer
 	private DAO<Utilisateur> dao = DAOFact.getUtilisateurDAO();
 	
 	@Override
@@ -17,7 +16,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		if (pseudoUnique(u.getPseudo())) {
 			if (mailUnique(u.getEmail())) {
 				if(u.getPseudo().matches("[A-Za-z0-9]+")) { //Si pseudo ne comprend que de l'alphanumérique (pas d'espace, de ' ,  etc)
-					lstUser.add(u); //ajout dans la liste de la BLL
 					dao.insert(u); //Ajout en BDD
 				}else {
 					throw new BLLException("Le pseudo ne doit contenir que des caractères alphanumériques");
@@ -31,6 +29,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	private boolean pseudoUnique(String pseudo) {
+		List<Utilisateur> lstUser = dao.selectAll();
 		for (Utilisateur utilisateur : lstUser) {
 			if(utilisateur.getPseudo().equals(pseudo)){
 				return false;
@@ -40,6 +39,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 	
 	private boolean mailUnique(String mail) {
+		List<Utilisateur> lstUser = dao.selectAll();
 		for (Utilisateur utilisateur : lstUser) {
 			if(utilisateur.getEmail().equals(mail)){
 				return false;
@@ -70,9 +70,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public List<Utilisateur> getUsers() {
-		if (lstUser == null) {
-			lstUser = dao.selectAll();
-		}
+		List<Utilisateur> lstUser = dao.selectAll();
 		return lstUser;
 	}
 	@Override
@@ -84,6 +82,11 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		retour.setCredit(null);
 		retour.setAdministrateur(false);
 		return retour;
+	}
+
+	@Override
+	public void suppr(Utilisateur u) {
+		dao.delete(u);		
 	}
 
 }

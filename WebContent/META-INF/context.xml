@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource  name="jdbc/contactDb"  
+    <Resource  name="jdbc/EncheresDB"  
     		  
     		  driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
     		  type="javax.sql.DataSource"
@@ -13,6 +13,5 @@
               maxIdle="10"  
               maxWait="100000"
              />
-              
-              
+>>>>>>> dev
  </Context>
