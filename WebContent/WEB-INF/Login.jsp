@@ -42,7 +42,7 @@
                     <br>
                     <div class="row g-12">
                         <div class="col-sm d-flex justify-content-end">
-                            <input class="btn btn-primary" type="submit" name="action" value="Connexion">
+                            <button class="btn btn-primary" type="submit" name="action" value="login">Se connecter</button>
                         </div>
                         <div class="col-sm">
                             <a href="/EncheresENI/AccueilServlet"><button class="btn btn-primary" type="button">Retour</button></a>

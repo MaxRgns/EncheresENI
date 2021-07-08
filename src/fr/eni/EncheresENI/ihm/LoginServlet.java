@@ -36,44 +36,55 @@ public class LoginServlet extends HttpServlet {
 
 		if (request.getParameter("action") != null) { // Si une action a envoyé sur cette page
 			switch (request.getParameter("action")) {
-			case "Connexion":
+			case "login":
 				login(request, response);
 				break;
-			case "Se déconnecter":
+			case "logout":
 				logout(request, response);
 				break;
-			case "Supprimer mon compte":
+			case "delete":
 				delete(request, response);
 				break;
 			}
-			// Dans tout les cas, il repart à l'accueil
-			request.getRequestDispatcher("AccueilServlet").forward(request, response);
-			
-		} else { // S'il na pas renvoyé de formulaire, il va repartir à la page login
-			request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+		} else { // S'il na pas renvoyé de formulaire
+			if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
+				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("AccueilServlet").forward(request, response);
+			}
+
 		}
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
+			System.out.println("login");
 			// Vérification login
 			Utilisateur user = manager.getConnection(request.getParameter("identifiant"), request.getParameter("pass"));
-			request.getSession().setAttribute("user", user);
+			if (user == null) {
+				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+				//TODO ajouter l'erreur dans la page
+			}else {
+				request.getSession().setAttribute("user", user);
+				request.getRequestDispatcher("AccueilServlet").forward(request, response);
+			}
 		}
-
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("logout");
 		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
 			request.getSession().setAttribute("user", null);
 		}
+		request.getRequestDispatcher("AccueilServlet").forward(request, response);
 	}
 
-	private void delete(HttpServletRequest request, HttpServletResponse response) {
+	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
 			manager.suppr((Utilisateur) request.getSession().getAttribute("user"));
 			request.getSession().setAttribute("user", null);
 		}
+		request.getRequestDispatcher("AccueilServlet").forward(request, response);
 	}
 
 	/**
