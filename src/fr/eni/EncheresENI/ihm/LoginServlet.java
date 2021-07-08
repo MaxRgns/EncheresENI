@@ -15,7 +15,7 @@ import fr.eni.EncheresENI.bo.Utilisateur;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	UtilisateurManager manager = UtilisateurManagerSingl.getInstance();
 	private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
 				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
 			} else {
-				request.getRequestDispatcher("AccueilServlet").forward(request, response);
+				request.getRequestDispatcher("Accueil").forward(request, response);
 			}
 
 		}
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 				//TODO ajouter l'erreur dans la page
 			}else {
 				request.getSession().setAttribute("user", user);
-				request.getRequestDispatcher("AccueilServlet").forward(request, response);
+				request.getRequestDispatcher("Accueil").forward(request, response);
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
 			request.getSession().setAttribute("user", null);
 		}
-		request.getRequestDispatcher("AccueilServlet").forward(request, response);
+		request.getRequestDispatcher("Accueil").forward(request, response);
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 			manager.suppr((Utilisateur) request.getSession().getAttribute("user"));
 			request.getSession().setAttribute("user", null);
 		}
-		request.getRequestDispatcher("AccueilServlet").forward(request, response);
+		request.getRequestDispatcher("Accueil").forward(request, response);
 	}
 
 	/**

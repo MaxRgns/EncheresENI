@@ -27,7 +27,7 @@
             <h1>ENI-Enchères</h1>
             <div class="col-6">
                 <h2>Connexion</h2>
-                <form class="form-group" action="" method="post">
+                <form class="form-group" action="Login" method="post">
 
                     <div class="row g-12">
                         <div class="col-sm">
@@ -45,7 +45,7 @@
                             <button class="btn btn-primary" type="submit" name="action" value="login">Se connecter</button>
                         </div>
                         <div class="col-sm">
-                            <a href="/EncheresENI/AccueilServlet"><button class="btn btn-primary" type="button">Retour</button></a>
+                            <a href="Accueil"><button class="btn btn-primary" type="button">Retour</button></a>
                         </div>
                     </div>
                    

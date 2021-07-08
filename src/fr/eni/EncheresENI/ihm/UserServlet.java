@@ -16,7 +16,7 @@ import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/UserServlet")
+@WebServlet("/User")
 public class UserServlet extends HttpServlet {
 	UtilisateurManager manager = UtilisateurManagerSingl.getInstance();
 	private static final long serialVersionUID = 1L;

@@ -77,7 +77,7 @@
                             <input class="btn btn-primary" type="submit" value="Créer">
                         </div>
                         <div class="col-sm">
-                            <a href="user.jsp"><button class="btn btn-primary" type="button">Annuler</button></a>
+                            <a href="Accueil"><button class="btn btn-primary" type="button">Annuler</button></a>
                         </div>
                     </div>
                    
