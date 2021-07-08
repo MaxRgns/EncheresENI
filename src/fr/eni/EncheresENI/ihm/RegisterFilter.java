@@ -21,12 +21,14 @@ public class RegisterFilter implements Filter {
      * Default constructor. 
      */
     public RegisterFilter() {
+    	
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
+		
 	}
 
 	/**

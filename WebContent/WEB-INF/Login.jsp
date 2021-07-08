@@ -31,12 +31,12 @@
 
                     <div class="row g-12">
                         <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Pseudo ou mail" aria-label="Pseudo">
+                            <input type="text" name="identifiant" class="form-control" placeholder="Pseudo ou mail" aria-label="Pseudo" required>
                         </div>
                     </div>
                     <div class="row g-12">
                         <div class="col-sm">
-                            <input type="password" class="form-control" placeholder="Mot de passe" aria-label="Prénom">
+                            <input type="password" name="pass" class="form-control" placeholder="Mot de passe" aria-label="Pass" required>
                         </div>
                     </div>
                     <br>
