@@ -1,7 +1,9 @@
 package fr.eni.EncheresENI.ihm;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,7 @@ import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
  */
 @WebServlet("/Profil")
 public class ProfilServlet extends HttpServlet {
+
 	UtilisateurManager manager = UtilisateurManagerSingl.getInstance();
 	private static final long serialVersionUID = 1L;
        
@@ -26,12 +29,14 @@ public class ProfilServlet extends HttpServlet {
      */
     public ProfilServlet() {
         super();
+
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// Note : ce servlet est supposé être appelé avec un idProfil correspondant à celui du profil que l'utilisateur veut consulter.
 		// S'il n'y a pas d'identifiant de renseigné, l'utilisateur sera renvoyé en page d'accueil
 		//TODO Vérifier la session avant de permettre l'accès aux infos
@@ -58,12 +63,14 @@ public class ProfilServlet extends HttpServlet {
 			request.getRequestDispatcher("Accueil").forward(request, response);//TODO Vérifier lien vers Accueil
 		}
 		
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

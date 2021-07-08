@@ -42,7 +42,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 				}
 			}
 		}catch (SQLException e){
-			System.err.println("Probleme d'accÃ¨s Ã  la base de donnÃ©es");
+			System.err.println("Probleme d'accès  la base de données");
 		}
 	}
 

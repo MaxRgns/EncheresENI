@@ -27,54 +27,54 @@
             <h1>ENI-Enchères</h1>
             <div class="col-6">
                 <h2>Mon compte</h2>
-                <form class="form-group" action="" method="post">
+                <form class="form-group" action="RegisterServlet" method="post">
 
                     <div class="row g-12">
                         <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Pseudo" aria-label="Pseudo">
+                            <input type="text" name="pseudo" class="form-control" placeholder="Pseudo" aria-label="Pseudo" required>
                         </div>
                         <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Nom" aria-label="Nom">
-                        </div>
-                    </div>
-                    <div class="row g-12">
-                        <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom">
-                        </div>
-                        <div class="col-sm">
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+                            <input type="text" name="nom" class="form-control" placeholder="Nom" aria-label="Nom" required>
                         </div>
                     </div>
                     <div class="row g-12">
                         <div class="col-sm">
-                            <input type="tel" class="form-control" placeholder="Téléphone" aria-label="Téléphone">
+                            <input type="text" name="prenom" class="form-control" placeholder="Prénom" aria-label="Prénom" required>
                         </div>
                         <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Rue" aria-label="Rue">
-                        </div>
-                    </div>
-                    <div class="row g-12">
-                        <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Code postal" aria-label="Code postal">
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" class="form-control" placeholder="Ville" aria-label="Ville">
+                            <input type="email" name="mail" class="form-control" placeholder="Email" aria-label="Email" required>
                         </div>
                     </div>
                     <div class="row g-12">
                         <div class="col-sm">
-                            <input type="password" class="form-control" placeholder="Mot de passe"
-                                aria-label="Mot de passe">
+                            <input type="tel" name="tel" class="form-control" placeholder="Téléphone" aria-label="Téléphone" required>
                         </div>
                         <div class="col-sm">
-                            <input type="password" class="form-control" placeholder="Confirmation"
-                                aria-label="Confirmation">
+                            <input type="text" name="rue" class="form-control" placeholder="Rue" aria-label="Rue" required>
+                        </div>
+                    </div>
+                    <div class="row g-12">
+                        <div class="col-sm">
+                            <input type="text" name="cp" class="form-control" placeholder="Code postal" aria-label="Code postal" required>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" name="ville" class="form-control" placeholder="Ville" aria-label="Ville" required>
+                        </div>
+                    </div>
+                    <div class="row g-12">
+                        <div class="col-sm">
+                            <input type="password" name="mdp" class="form-control" placeholder="Mot de passe"
+                                aria-label="Mot de passe" required>
+                        </div>
+                        <div class="col-sm">
+                            <input type="password" name="conf" class="form-control" placeholder="Confirmation"
+                                aria-label="Confirmation" required>
                         </div>
                     </div>
                     <br>
                     <div class="row g-12">
                         <div class="col-sm d-flex justify-content-end">
-                            <input class="btn btn-primary" type="submit" value="Créer">
+                            <input name="register" class="btn btn-primary" type="submit" value="Créer">
                         </div>
                         <div class="col-sm">
                             <a href="Accueil"><button class="btn btn-primary" type="button">Annuler</button></a>
