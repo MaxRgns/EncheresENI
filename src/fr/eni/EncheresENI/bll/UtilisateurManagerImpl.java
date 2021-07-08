@@ -1,7 +1,6 @@
 package fr.eni.EncheresENI.bll;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.Utilisateur;
@@ -56,7 +55,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			if ((user.getPseudo().equals(ident)) || (user.getEmail().equals(ident))) {
 				//Si l'identifiant correspond au pseudo ou email de l'utilisateur
 				if (user.getMotDePasse().equals(password)) {
-					System.out.println("�a fonctionne");
+					System.out.println("Connecté");
 					//Si c'est le bon mot de passe
 					return user;
 				}else {
