@@ -26,7 +26,6 @@
 	crossorigin="anonymous"></script>
 <title>ENI-Enchères</title>
 </head>
-
 <body>
 	<div class="container-fluid">
 		<div class="row">
@@ -34,7 +33,6 @@
 				<h1>ENI-Enchères</h1>
 
 			</div>
-
 			<div class="offset-7 col-2">
 			<!-- Début session ?  -->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal"

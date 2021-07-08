@@ -32,17 +32,17 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			stmt.setString(7,user.getCodepostal());
 			stmt.setString(8,user.getVille());
 			stmt.setString(9,user.getMotDePasse());
-			stmt.setString(10,Double.toString(user.getCredit()));
-			stmt.setString(11,Boolean.toString(user.isAdministrateur()));
+			stmt.setDouble(10,user.getCredit());
+			stmt.setBoolean(11,user.isAdministrateur());
 			int nb = stmt.executeUpdate();
-			if(nb>0) { //Si la requête a bien récupérée une clé, on l'attribue au nouvel objet
+			if(nb>0) { //Si la requ�te a bien r�cup�r�e une cl�, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
 				if(rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
 			}
 		}catch (SQLException e){
-			System.err.println("Probleme d'accès à la base de données");
+			System.err.println("Probleme d'acc�s�� la base de donn�es");
 		}
 	}
 

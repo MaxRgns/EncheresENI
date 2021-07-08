@@ -1,3 +1,4 @@
+
 package fr.eni.EncheresENI.ihm;
 
 import java.io.IOException;
@@ -38,3 +39,4 @@ public class AccueilServlet extends HttpServlet {
 	}
 
 }
+

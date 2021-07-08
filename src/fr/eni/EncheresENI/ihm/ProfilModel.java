@@ -1,5 +1,6 @@
 package fr.eni.EncheresENI.ihm;
 
+
 import fr.eni.EncheresENI.bo.Utilisateur;
 
 public class ProfilModel {
@@ -12,4 +13,5 @@ public class ProfilModel {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+
 }

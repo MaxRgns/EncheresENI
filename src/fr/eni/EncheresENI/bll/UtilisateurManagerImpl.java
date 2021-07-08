@@ -17,6 +17,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			if (mailUnique(u.getEmail())) {
 				if(u.getPseudo().matches("[A-Za-z0-9]+")) { //Si pseudo ne comprend que de l'alphanumérique (pas d'espace, de ' ,  etc)
 					dao.insert(u); //Ajout en BDD
+					System.out.println(u);
 				}else {
 					throw new BLLException("Le pseudo ne doit contenir que des caractères alphanumériques");
 				}
@@ -55,7 +56,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			if ((user.getPseudo().equals(ident)) || (user.getEmail().equals(ident))) {
 				//Si l'identifiant correspond au pseudo ou email de l'utilisateur
 				if (user.getMotDePasse().equals(password)) {
-					System.out.println("ça fonctionne");
+					System.out.println("�a fonctionne");
 					//Si c'est le bon mot de passe
 					return user;
 				}else {
