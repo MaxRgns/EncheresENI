@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="fr.eni.EncheresENI.bo.Utilisateur" %>
     <%@ page import="fr.eni.EncheresENI.ihm.ProfilModel" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,5 +18,11 @@
 <label>Téléphone : </label> ${profil.utilisateur.telephone}<br>
 <label>Adresse : </label><br> ${profil.utilisateur.rue}<br>
 ${profil.utilisateur.codepostal} ${profil.utilisateur.ville}<br>
+<%-- <c:forEach items="${model.contacts}" var="contact">
+<p>- ${contact.nom} ${contact.prenom} (${contact.dateNaissance}) / ${contact.numTel}</p>
+	</c:forEach> --%>
+<c:if test="${profil.utilisateur.noUtilisateur == user.noUtilisateur}">
+<a href="Edit">Modifier</a>
+</c:if>
 </body>
 </html>

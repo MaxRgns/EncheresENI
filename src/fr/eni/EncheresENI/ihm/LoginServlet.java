@@ -42,9 +42,6 @@ public class LoginServlet extends HttpServlet {
 			case "logout":
 				logout(request, response);
 				break;
-			case "delete":
-				delete(request, response);
-				break;
 			}
 		} else { // S'il na pas renvoyé de formulaire
 			if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
@@ -74,14 +71,6 @@ public class LoginServlet extends HttpServlet {
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("logout");
 		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
-			request.getSession().setAttribute("user", null);
-		}
-		request.getRequestDispatcher("Accueil").forward(request, response);
-	}
-
-	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
-			manager.suppr((Utilisateur) request.getSession().getAttribute("user"));
 			request.getSession().setAttribute("user", null);
 		}
 		request.getRequestDispatcher("Accueil").forward(request, response);

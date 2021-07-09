@@ -15,44 +15,43 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	private static final String INSERT = "INSERT INTO UTILISATEURS VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String UPDATE = "UPDATE UTILISATEURS SET nom=?, prenom=?, tel=? WHERE no_utilisateur = ?"; //TODO A adapter à la BDD
+	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur = ?";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
-	
-	
+
 	@Override
 	public void insert(Utilisateur user) {
-		try(Connection connection = ConnectionProvider.getConnection()){
+		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,user.getPseudo());
-			stmt.setString(2,user.getNom());
-			stmt.setString(3,user.getPrenom());
-			stmt.setString(4,user.getEmail());
-			stmt.setString(5,user.getTelephone());
-			stmt.setString(6,user.getRue());
-			stmt.setString(7,user.getCodepostal());
-			stmt.setString(8,user.getVille());
-			stmt.setString(9,user.getMotDePasse());
-			stmt.setDouble(10,user.getCredit());
-			stmt.setBoolean(11,user.isAdministrateur());
+			stmt.setString(1, user.getPseudo());
+			stmt.setString(2, user.getNom());
+			stmt.setString(3, user.getPrenom());
+			stmt.setString(4, user.getEmail());
+			stmt.setString(5, user.getTelephone());
+			stmt.setString(6, user.getRue());
+			stmt.setString(7, user.getCodepostal());
+			stmt.setString(8, user.getVille());
+			stmt.setString(9, user.getMotDePasse());
+			stmt.setDouble(10, user.getCredit());
+			stmt.setBoolean(11, user.isAdministrateur());
 			int nb = stmt.executeUpdate();
-			if(nb>0) { //Si la requ�te a bien r�cup�r�e une cl�, on l'attribue au nouvel objet
+			if (nb > 0) { // Si la requ�te a bien r�cup�r�e une cl�, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
-				if(rsk.next()) {
+				if (rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
 			}
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
 	}
 
 	@Override
 	public Utilisateur selectById(Integer id) throws SQLException {
-		try(Connection connection = ConnectionProvider.getConnection()){
+		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			rs.next(); //Passage à la première (et dernière) ligne du résultat de requête
+			rs.next(); // Passage à la première (et dernière) ligne du résultat de requête
 			Utilisateur u = new Utilisateur();
 			u.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			u.setPseudo(rs.getString("pseudo"));
@@ -66,9 +65,9 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 			u.setMotDePasse(rs.getString("mot_de_passe"));
 			u.setCredit(rs.getDouble("credit"));
 			u.setAdministrateur(rs.getBoolean("administrateur"));
-			//TODO recupérer les ventes et enchères et les lier au compte
+			// TODO recupérer les ventes et enchères et les lier au compte
 			return u;
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			throw new SQLException("Probleme d'accès à la base de données");
 		}
 	}
@@ -76,10 +75,10 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	@Override
 	public List<Utilisateur> selectAll() {
 		List<Utilisateur> retour = new ArrayList<>();
-		try(Connection connection = ConnectionProvider.getConnection()){
+		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(SELECT_ALL);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Utilisateur u = new Utilisateur();
 				u.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				u.setPseudo(rs.getString("pseudo"));
@@ -93,47 +92,44 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 				u.setMotDePasse(rs.getString("mot_de_passe"));
 				u.setCredit(rs.getDouble("credit"));
 				u.setAdministrateur(rs.getBoolean("administrateur"));
-				//TODO recupérer les ventes et enchères et les lier au compte
 				retour.add(u);
 			}
 			return retour;
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public void update(Utilisateur object) {
-		try(Connection connection = ConnectionProvider.getConnection()){
+		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(UPDATE);
-			stmt.setString(1,object.getPseudo());
-			stmt.setString(2,object.getNom());
-			stmt.setString(3,object.getPrenom());
-			stmt.setString(4,object.getEmail());
-			stmt.setString(5,object.getTelephone());
-			stmt.setString(6,object.getRue());
-			stmt.setString(7,object.getCodepostal());
-			stmt.setString(8,object.getVille());
-			stmt.setString(9,object.getMotDePasse());
-			stmt.setDouble(10,object.getCredit());
-			stmt.setBoolean(11,object.isAdministrateur());
-			
-		}catch (SQLException e){
+			stmt.setString(1, object.getPseudo());
+			stmt.setString(2, object.getNom());
+			stmt.setString(3, object.getPrenom());
+			stmt.setString(4, object.getEmail());
+			stmt.setString(5, object.getTelephone());
+			stmt.setString(6, object.getRue());
+			stmt.setString(7, object.getCodepostal());
+			stmt.setString(8, object.getVille());
+			stmt.setString(9, object.getMotDePasse());
+			stmt.setInt(10, object.getNoUtilisateur());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
-		
 	}
 
 	@Override
 	public void delete(Integer id) {
-		try(Connection connection = ConnectionProvider.getConnection()){
+		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(DELETE);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
-			
-		}catch (SQLException e){
+
+		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
 	}

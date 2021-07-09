@@ -85,8 +85,13 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public void suppr(Utilisateur u) {
+	public void suppr(Utilisateur u) throws BLLException {
 		dao.delete(u.getNoUtilisateur());		
+	}
+
+	@Override
+	public void updateUser(Utilisateur u) throws BLLException {
+		dao.update(u);
 	}
 
 }
