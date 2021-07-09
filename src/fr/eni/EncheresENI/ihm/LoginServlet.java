@@ -47,26 +47,20 @@ public class LoginServlet extends HttpServlet {
 				break;
 			}
 		} else { // S'il na pas renvoyé de formulaire
-			if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
-				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
-			} else {
-				request.getRequestDispatcher("Accueil").forward(request, response);
-			}
-
+				request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
 		}
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getSession().getAttribute("user") == null) { // Si le visiteur n'est pas connecté à un compte
-			System.out.println("login");
 			// Vérification login
 			Utilisateur user = manager.getConnection(request.getParameter("identifiant"), request.getParameter("pass"));
 			if (user == null) {
-				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
 				//TODO ajouter l'erreur dans la page
 			}else {
 				request.getSession().setAttribute("user", user);
-				request.getRequestDispatcher("Accueil").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
 			}
 		}
 	}

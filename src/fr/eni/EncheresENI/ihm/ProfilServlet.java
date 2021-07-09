@@ -60,7 +60,7 @@ public class ProfilServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/Profil.jsp").forward(request, response);
 		}else{
 			//Si l'utilisateur n'a pas entré un identifiant valide, le servlet le renvoie à l'accueil
-			request.getRequestDispatcher("Accueil").forward(request, response);//TODO Vérifier lien vers Accueil
+			request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);//TODO Vérifier lien vers Accueil
 		}
 		
 
