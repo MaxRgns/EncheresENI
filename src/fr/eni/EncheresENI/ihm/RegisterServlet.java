@@ -15,7 +15,7 @@ import fr.eni.EncheresENI.bo.Utilisateur;
 /**
  * Servlet implementation class RegiterServlet
  */
-@WebServlet("/RegisterServlet")
+@WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UtilisateurManager manager = UtilisateurManagerSingl.getInstance();
@@ -35,27 +35,25 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		ProfilModel model = new ProfilModel();
-		if (request.getParameter("register") == null) {
-			request.getRequestDispatcher("WEB-INF/Register.jsp").forward(request, response);
 
-			if (request.getParameter("register") != null) {
-				if (request.getParameter("mdp").equals(request.getParameter("conf"))) {
+		if (request.getParameter("register") != null) {
+			if (request.getParameter("mdp").equals(request.getParameter("conf"))) {
 
-					Utilisateur user = new Utilisateur();
+				Utilisateur user = new Utilisateur();
 
-					user.setPseudo(request.getParameter("pseudo"));
-					user.setNom(request.getParameter("nom"));
-					user.setPrenom(request.getParameter("prenom"));
-					user.setEmail(request.getParameter("mail"));
-					user.setTelephone(request.getParameter("tel"));
-					user.setRue(request.getParameter("rue"));
-					user.setCodepostal(request.getParameter("cp"));
-					user.setVille(request.getParameter("ville"));
-					user.setMotDePasse(request.getParameter("mdp"));
-					user.setCredit(100.0);
+				user.setPseudo(request.getParameter("pseudo"));
+				user.setNom(request.getParameter("nom"));
+				user.setPrenom(request.getParameter("prenom"));
+				user.setEmail(request.getParameter("mail"));
+				user.setTelephone(request.getParameter("tel"));
+				user.setRue(request.getParameter("rue"));
+				user.setCodepostal(request.getParameter("cp"));
+				user.setVille(request.getParameter("ville"));
+				user.setMotDePasse(request.getParameter("mdp"));
+				user.setCredit(100.0);
 
-					model.setUtilisateur(user);
-					System.out.println(user);
+				model.setUtilisateur(user);
+				System.out.println(user);
 
 					try {
 						manager.add(user);
@@ -64,13 +62,16 @@ public class RegisterServlet extends HttpServlet {
 					}
 				} else {
 					System.out.println("Mdp diff�rents");
-				}
-			}
-		}
 
+				}
+			} 
 		request.setAttribute("model", model);
 		request.getRequestDispatcher("WEB-INF/Register.jsp").forward(request, response);
-	}
+		request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
+	
+		}
+
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

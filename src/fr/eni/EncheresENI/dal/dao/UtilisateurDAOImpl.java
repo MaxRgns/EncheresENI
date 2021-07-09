@@ -20,7 +20,8 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 
 	@Override
 	public void insert(Utilisateur user) {
-		try (Connection connection = ConnectionProvider.getConnection()) {
+
+		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
@@ -39,6 +40,7 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 				if (rsk.next()) {
 					user.setNoUtilisateur(rsk.getInt(1));
 				}
+			
 			}
 		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
