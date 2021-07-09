@@ -3,8 +3,6 @@ package fr.eni.EncheresENI.dal.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import fr.eni.EncheresENI.bo.Utilisateur;
-
 public interface DAO<T> {
 	public void insert(T object);
 	public T selectById(Integer id) throws SQLException;
