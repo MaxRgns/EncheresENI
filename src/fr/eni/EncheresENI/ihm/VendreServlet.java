@@ -32,15 +32,26 @@ public class VendreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("nom") != null) {
-			System.out.println(request.getParameter("nom"));
-			System.out.println(request.getParameter("description"));
-			System.out.println(request.getParameter("categorie"));
-			System.out.println(request.getParameter("prix"));
+		if (request.getParameter("action") != null) {
+			switch(request.getParameter("action")) {
+			case "Enregistrer" :
+				enregistrer(request, response);
+				break;
+			case "Retour" :
+				request.getRequestDispatcher("Accueil").forward(request, response);
+				break;
+			}
 		}
 		List<Categorie> categories = catManager.getCategories();
 		request.getSession().setAttribute("categories", categories);
 		request.getRequestDispatcher("WEB-INF/Vendre.jsp").forward(request, response);
+	}
+
+	private void enregistrer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("nom"));
+		System.out.println(request.getParameter("description"));
+		System.out.println(request.getParameter("categorie"));
+		System.out.println(request.getParameter("prix"));
 	}
 
 	/**
