@@ -7,6 +7,7 @@
 <html lang="fr">
 
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,11 +85,12 @@
 					</c:if>
 					<c:if test="${sessionScope.user != null }">
 						<div class="d-flex bd-highlight mb-3">
-            				<div class="me-auto p-2 bd-highlight"> <a href="Accueil">
-                   				 <h1>ENI-Enchères</h1></a></div>
+            				<div class="me-auto p-2 bd-highlight">
+            				 <a href="Accueil"><h1>ENI-Enchères</h1></a></div>
+            				 <p>${profil.utilisateur.noUtilisateur}</p>
 						            <div class="p-2 bd-highlight"> <a href="">Vendre un article</a></div>
-						            <div class="p-2 bd-highlight"> <a href="">Mon profil</a></div>
-						            <div class="p-2 bd-highlight"> <a href="">Déconnexion</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon profil</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Login" id="logout">Déconnexion</a></div>
         					</div>
 					</c:if>
 			</div>
@@ -138,21 +140,21 @@
 
             <div class="offset-1 col-3">
 
-                <input type="radio" name="achat" id="achat"> Achats
+                <input type="radio" name="AchatVente" id="achat" value="achat" checked> Achats
 
                 <div class="offset-1">
 
                     <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 100px;">
 
-                        <div class="p-2 bd-highlight"> <input class="achat" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
 
                             Enchères ouvertes</div>
 
-                        <div class="p-2 bd-highlight"> <input class="achat" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
 
                             Mes ouvertes</div>
 
-                        <div class="p-2 bd-highlight"> <input class="achat" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
 
                             Enchères remportées</div>
 
@@ -164,28 +166,48 @@
 
             <div class="col-3">
 
-                <input type="radio" name="vente" id="vente"> Ventes
+                <input type="radio" name="AchatVente" id="vente" value="vente"> Ventes
 
                 <div class="offset-1">
 
                     <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 100px;">
 
-                        <div class="p-2 bd-highlight"> <input class="vente" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
 
                             En cours</div>
 
-                        <div class="p-2 bd-highlight"> <input class="vente" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
 
                             Non débutées</div>
 
-                        <div class="p-2 bd-highlight"> <input class="vente" type="checkbox" name="typeEncheres" id="typeEncheres">
+                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
 
                             Terminées</div>
 
                     </div>
 
                 </div>
+<script> 
+$("input[name='typeVente']").prop('disabled', true);
+$("input[name='typeAchat']").prop('disabled', false);
 
+$("input[value='achat']").change(function() {
+	  $("input[name='typeVente']").prop('disabled', true);
+	});
+
+$("input[value='vente']").change(function() {
+	  $("input[name='typeAchat']").prop('disabled', true);
+	});
+
+	// Enable checkbox
+	$("input[value='vente']").change(function() {
+	  $("input[name='typeVente']").prop('disabled', false);
+	});
+	$("input[value='achat']").change(function() {
+		  $("input[name='typeAchat']").prop('disabled', false);
+		});
+
+</script>
             </div>
 	
         </div>
@@ -256,12 +278,6 @@
         </div>
     </div>
 </body>
-<script> 
-jQuery(function($){
-	$('.achat').click(function(){
-		$('.vente').prop("disabled", !$(this).is(':checked')')
-	});
-});
-</script>
+
 
 </html>
