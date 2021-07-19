@@ -85,11 +85,12 @@
 					</c:if>
 					<c:if test="${sessionScope.user != null }">
 						<div class="d-flex bd-highlight mb-3">
-            				<div class="me-auto p-2 bd-highlight"> <a href="Accueil">
-                   				 <h1>ENI-Enchères</h1></a></div>
+            				<div class="me-auto p-2 bd-highlight">
+            				 <a href="Accueil"><h1>ENI-Enchères</h1></a></div>
+            				 <p>${profil.utilisateur.noUtilisateur}</p>
 						            <div class="p-2 bd-highlight"> <a href="">Vendre un article</a></div>
-						            <div class="p-2 bd-highlight"> <a href="">Mon profil</a></div>
-						            <div class="p-2 bd-highlight"> <a href="">Déconnexion</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon profil</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Login" id="logout">Déconnexion</a></div>
         					</div>
 					</c:if>
 			</div>
@@ -139,7 +140,7 @@
 
             <div class="offset-1 col-3">
 
-                <input type="radio" name="AchatVente" id="achat" value="achat"> Achats
+                <input type="radio" name="AchatVente" id="achat" value="achat" checked> Achats
 
                 <div class="offset-1">
 
@@ -187,6 +188,9 @@
 
                 </div>
 <script> 
+$("input[name='typeVente']").prop('disabled', true);
+$("input[name='typeAchat']").prop('disabled', false);
+
 $("input[value='achat']").change(function() {
 	  $("input[name='typeVente']").prop('disabled', true);
 	});
