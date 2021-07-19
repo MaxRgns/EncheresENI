@@ -1,7 +1,6 @@
 package fr.eni.EncheresENI.bll;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.Utilisateur;
@@ -56,7 +55,8 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			if ((user.getPseudo().equals(ident)) || (user.getEmail().equals(ident))) {
 				//Si l'identifiant correspond au pseudo ou email de l'utilisateur
 				if (user.getMotDePasse().equals(password)) {
-					System.out.println("Áa fonctionne");
+
+					System.out.println("Connect√©");
 					//Si c'est le bon mot de passe
 					return user;
 				}else {
@@ -86,8 +86,13 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public void suppr(Utilisateur u) {
-		dao.delete(u);		
+	public void suppr(Utilisateur u) throws BLLException {
+		dao.delete(u.getNoUtilisateur());		
+	}
+
+	@Override
+	public void updateUser(Utilisateur u) throws BLLException {
+		dao.update(u);
 	}
 
 }

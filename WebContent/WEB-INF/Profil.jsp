@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="fr.eni.EncheresENI.bo.Utilisateur"%>
-<%@ page import="fr.eni.EncheresENI.ihm.ProfilModel"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="fr.eni.EncheresENI.bo.Utilisateur" %>
+    <%@ page import="fr.eni.EncheresENI.ihm.ProfilModel" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,23 +30,18 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 	crossorigin="anonymous"></script>
-<title>ENI-Enchères</title>
+<title>ENI-EnchÃ¨res</title>
 </head>
 <body>
-	
-	<h3>Profil de ${profil.utilisateur.pseudo}</h3>
-	<br>
-	<label>Nom : </label> ${profil.utilisateur.nom}
-	<br>
-	<label>Prénom : </label> ${profil.utilisateur.prenom}
-	<br>
-	<label>E-mail : </label> ${profil.utilisateur.email}
-	<br>
-	<label>Téléphone : </label> ${profil.utilisateur.telephone}
-	<br>
-	<label>Adresse : </label>
-	<br> ${profil.utilisateur.rue}
-	<br> ${profil.utilisateur.codepostal} ${profil.utilisateur.ville}
-	<br>
+<h3>Profil de ${profil.utilisateur.pseudo}</h3> 
+<label>Nom : </label> ${profil.utilisateur.nom}<br>
+<label>PrÃ©nom : </label> ${profil.utilisateur.prenom}<br>
+<label>E-mail : </label> ${profil.utilisateur.email}<br>
+<label>TÃ©lÃ©phone : </label> ${profil.utilisateur.telephone}<br>
+<label>Adresse : </label><br> ${profil.utilisateur.rue}<br>
+${profil.utilisateur.codepostal} ${profil.utilisateur.ville}<br>
+<c:if test="${profil.utilisateur.noUtilisateur == user.noUtilisateur}">
+<a href="Edit">Modifier</a>
+</c:if>
 </body>
 </html>

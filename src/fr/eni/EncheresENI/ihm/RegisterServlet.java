@@ -25,7 +25,6 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	public RegisterServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -56,19 +55,23 @@ public class RegisterServlet extends HttpServlet {
 				model.setUtilisateur(user);
 				System.out.println(user);
 
-				try {
-					manager.add(user);
-				} catch (BLLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					try {
+						manager.add(user);
+					} catch (BLLException e) {
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("Mdp diff�rents");
+
 				}
 			} 
-		}
-
 		request.setAttribute("model", model);
 		request.getRequestDispatcher("WEB-INF/Register.jsp").forward(request, response);
 		request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
-	}
+	
+		}
+
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -76,7 +79,6 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
