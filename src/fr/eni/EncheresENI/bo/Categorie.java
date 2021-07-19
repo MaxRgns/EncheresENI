@@ -16,6 +16,9 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 
+	public Categorie() {
+	}
+
 	public Integer getNoCategorie() {
 		return noCategorie;
 	}

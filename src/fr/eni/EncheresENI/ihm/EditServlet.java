@@ -85,7 +85,7 @@ public class EditServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("Erreur mot de passe"); // TODO Faire deux messages d'erreurs
+			System.out.println("Erreur mot de passe"); // TODO Faire deux messages d'erreurs (pas le bon ancien mot de passe && pas le bon en vérif)
 		}
 	}
 
