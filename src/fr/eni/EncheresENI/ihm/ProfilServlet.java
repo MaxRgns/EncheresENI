@@ -59,14 +59,13 @@ public class ProfilServlet extends HttpServlet {
 		}
 		if (request.getAttribute("profil") != null ) { 
 			//Si l'utilisateur a trouv� un profil correspondant à l'id, le servlet charge la page Profil
-			System.out.println("ae "+request.getParameter("idProfil"));
+		
 			request.getRequestDispatcher("WEB-INF/Profil.jsp").forward(request, response);
 		}else{
 			//Si l'utilisateur n'a pas entré un identifiant valide, le servlet le renvoie à l'accueil
 			request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);//TODO Vérifier lien vers Accueil
 		}
 		
-
 	}
 
 	/**
