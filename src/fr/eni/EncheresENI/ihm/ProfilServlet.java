@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.EncheresENI.bll.BLLException;
-import fr.eni.EncheresENI.bll.UtilisateurManager;
-import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManager;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManagerSingl;
 
 /**
  * Servlet implementation class ProfilServlet
@@ -58,7 +58,7 @@ public class ProfilServlet extends HttpServlet {
 			}
 		}
 		if (request.getAttribute("profil") != null ) { 
-			//Si l'utilisateur a trouv� un profil correspondant à l'id, le servlet charge la page Profil
+			//Si l'utilisateur a trouv� un profil correspondant à l'id, le servlet charge la page Profil
 			System.out.println("ae "+request.getParameter("idProfil"));
 			request.getRequestDispatcher("WEB-INF/Profil.jsp").forward(request, response);
 		}else{

@@ -1,5 +1,6 @@
-package fr.eni.EncheresENI.bll;
+package fr.eni.EncheresENI.bll.Categorie;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.Categorie;
@@ -16,6 +17,16 @@ class CategorieManagerImpl implements CategorieManager {
 	}
 
 	@Override
+	public Categorie getById(Integer id) {
+		try {
+			return dao.selectById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Categorie> getCategories() {
 		return dao.selectAll();
 	}
@@ -30,5 +41,4 @@ class CategorieManagerImpl implements CategorieManager {
 	public void supprCat(Categorie c){
 		dao.delete(c.getNoCategorie());
 	}
-
 }

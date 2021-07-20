@@ -1,10 +1,11 @@
-package fr.eni.EncheresENI.dal.dao;
+package fr.eni.EncheresENI.dal.dao.Categorie;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.Categorie;
+import fr.eni.EncheresENI.dal.dao.DAO;
 
 public class CategorieDAOMock implements DAO<Categorie> {
 	private List<Categorie> lstCatMock = new ArrayList<>();

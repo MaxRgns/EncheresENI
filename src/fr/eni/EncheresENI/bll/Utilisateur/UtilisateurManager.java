@@ -1,8 +1,9 @@
-package fr.eni.EncheresENI.bll;
+package fr.eni.EncheresENI.bll.Utilisateur;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import fr.eni.EncheresENI.bll.BLLException;
 import fr.eni.EncheresENI.bo.Utilisateur;
 
 public interface UtilisateurManager {

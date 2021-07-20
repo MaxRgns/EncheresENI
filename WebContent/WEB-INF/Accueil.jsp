@@ -88,9 +88,9 @@
             				<div class="me-auto p-2 bd-highlight">
             				 <a href="Accueil"><h1>ENI-Enchères</h1></a></div>
             				 <p>${profil.utilisateur.noUtilisateur}</p>
-						            <div class="p-2 bd-highlight"> <a href="">Vendre un article</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Vendre">Vendre un article</a></div>
 						            <div class="p-2 bd-highlight"> <a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon profil</a></div>
-						            <div class="p-2 bd-highlight"> <a href="Login" id="logout">Déconnexion</a></div>
+						            <div class="p-2 bd-highlight"> <a href="Login?action=logout">Déconnexion</a></div>
         					</div>
 					</c:if>
 			</div>

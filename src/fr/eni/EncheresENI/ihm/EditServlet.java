@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.EncheresENI.bll.BLLException;
-import fr.eni.EncheresENI.bll.UtilisateurManager;
-import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManager;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManagerSingl;
 import fr.eni.EncheresENI.bo.Utilisateur;
 
 /**
@@ -78,6 +78,7 @@ public class EditServlet extends HttpServlet {
 			update.setCodepostal(request.getParameter("cp"));
 			update.setVille(request.getParameter("ville"));
 			update.setMotDePasse(request.getParameter("mdp"));
+			//TODO Régler problème accents pas pris en compte
 			try {
 				manager.updateUser(update);
 				request.getSession().setAttribute("user", update);
@@ -85,7 +86,7 @@ public class EditServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("Erreur mot de passe"); // TODO Faire deux messages d'erreurs (pas le bon ancien mot de passe && pas le bon en vérif)
+			System.out.println("Erreur mot de passe"); //TODO Faire deux messages d'erreurs (pas le bon ancien mot de passe && pas le bon en vérif)
 		}
 	}
 

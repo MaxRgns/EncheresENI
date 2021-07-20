@@ -1,4 +1,4 @@
-package fr.eni.EncheresENI.dal.dao;
+package fr.eni.EncheresENI.dal.dao.Utilisateur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.eni.EncheresENI.bo.Utilisateur;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
+import fr.eni.EncheresENI.dal.dao.DAO;
 
 public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	private static final String INSERT = "INSERT INTO UTILISATEURS VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -105,19 +106,19 @@ public class UtilisateurDAOImpl implements DAO<Utilisateur> {
 	}
 
 	@Override
-	public void update(Utilisateur object) {
+	public void update(Utilisateur u) {
 		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(UPDATE);
-			stmt.setString(1, object.getPseudo());
-			stmt.setString(2, object.getNom());
-			stmt.setString(3, object.getPrenom());
-			stmt.setString(4, object.getEmail());
-			stmt.setString(5, object.getTelephone());
-			stmt.setString(6, object.getRue());
-			stmt.setString(7, object.getCodepostal());
-			stmt.setString(8, object.getVille());
-			stmt.setString(9, object.getMotDePasse());
-			stmt.setInt(10, object.getNoUtilisateur());
+			stmt.setString(1, u.getPseudo());
+			stmt.setString(2, u.getNom());
+			stmt.setString(3, u.getPrenom());
+			stmt.setString(4, u.getEmail());
+			stmt.setString(5, u.getTelephone());
+			stmt.setString(6, u.getRue());
+			stmt.setString(7, u.getCodepostal());
+			stmt.setString(8, u.getVille());
+			stmt.setString(9, u.getMotDePasse());
+			stmt.setInt(10, u.getNoUtilisateur());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
