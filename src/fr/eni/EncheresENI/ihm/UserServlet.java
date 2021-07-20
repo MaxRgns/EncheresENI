@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.EncheresENI.bll.BLLException;
-import fr.eni.EncheresENI.bll.UtilisateurManager;
-import fr.eni.EncheresENI.bll.UtilisateurManagerSingl;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManager;
+import fr.eni.EncheresENI.bll.Utilisateur.UtilisateurManagerSingl;
 
 /**
  * Servlet implementation class UserServlet

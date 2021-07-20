@@ -1,4 +1,4 @@
-package fr.eni.EncheresENI.dal.dao;
+package fr.eni.EncheresENI.dal.dao.Categorie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.eni.EncheresENI.bo.Categorie;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
+import fr.eni.EncheresENI.dal.dao.DAO;
 
 public class CategorieDAOImpl implements DAO<Categorie> {
 	private static final String INSERT = "INSERT INTO CATEGORIES VALUES (?)";

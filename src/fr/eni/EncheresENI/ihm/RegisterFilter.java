@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * Servlet Filter implementation class RegisterFilter
  */
 //Renverra à la page login si l'utilisateur tente d'accéder à l'une des pages du WebFilter sans être connecté. 
-//@WebFilter({"/UserServlet", "/ProfilServlet"})   //Décommenter le WebFilter pour activer le filtre.
+@WebFilter({"/UserServlet", "/ProfilServlet", "/Vendre"})   //Décommenter le WebFilter pour activer le filtre.
 public class RegisterFilter implements Filter {
 
     /**

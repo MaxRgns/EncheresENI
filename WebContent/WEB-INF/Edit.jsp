@@ -96,8 +96,7 @@
 					<br>
 					<div class="row g-12">
 						<div class="col-sm d-flex justify-content-begin">
-							<button class="btn btn-secondary" type="submit" name="action"
-								value="cancel">Retour</button>
+							<button class="btn btn-secondary" type="submit"><a href="Profil?idProfil=${user.noUtilisateur}">Retour</a></button>
 						</div>
 						<div class="col-sm d-flex justify-content-center">
 							<button class="btn btn-primary" type="submit" name="action"

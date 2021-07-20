@@ -1,9 +1,10 @@
-package fr.eni.EncheresENI.dal.dao;
+package fr.eni.EncheresENI.dal.dao.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.Utilisateur;
+import fr.eni.EncheresENI.dal.dao.DAO;
 
 public class UtilisateurDAOMock implements DAO<Utilisateur> {
 	private List<Utilisateur> lstUtilMock = new ArrayList<>();

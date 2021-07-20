@@ -4,12 +4,14 @@ public class Retrait {
 	private String rue;
 	private String code_postal;
 	private String ville;
-	//TODO Ajouter l'article vendu ou non ?
 	
 	public Retrait(String rue, String code_postal, String ville) {
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
+	}
+
+	public Retrait() {
 	}
 
 	public String getRue() {
