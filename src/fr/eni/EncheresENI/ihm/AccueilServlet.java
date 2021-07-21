@@ -41,6 +41,7 @@ public class AccueilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String keyword = null;
 		Integer catId = 0;
 		if (request.getParameter("cat") != null) {
 			catId = Integer.valueOf(request.getParameter("cat"));
@@ -50,6 +51,11 @@ public class AccueilServlet extends HttpServlet {
 		request.getSession().setAttribute("categories", categories);
 
 		List<ArticleVendu> lstAchats = triCat(artManager.getArticles(), catId);
+		if (request.getParameter("keyword") != null) {
+			keyword = request.getParameter("keyword");
+			lstAchats = triKey(lstAchats, keyword);
+		}
+		
 		List<ArticleVendu> lstVentes = new ArrayList<>();
 		if (request.getSession().getAttribute("user") != null) {
 			Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
@@ -64,10 +70,9 @@ public class AccueilServlet extends HttpServlet {
 	}
 
 	private List<ArticleVendu> triCat(List<ArticleVendu> lstAchats, Integer cat) {
-
 		List<ArticleVendu> retour = new ArrayList<>();
 		for (int i = 0; i < lstAchats.size(); i++) {
-				if (cat != 0) { // Si un filtre de catégorie est actif
+				if (cat > 0) { // Si un filtre de catégorie est actif
 					if (lstAchats.get(i).getCategorie() == cat) {
 						retour.add(lstAchats.get(i));
 					}
@@ -75,10 +80,19 @@ public class AccueilServlet extends HttpServlet {
 					retour.add(lstAchats.get(i));
 				}
 			}
-		
-
 		return retour;
 	}
+	
+	private List<ArticleVendu> triKey(List<ArticleVendu> lstAchats, String keyword) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (int i = 0; i < lstAchats.size(); i++) {
+			if (lstAchats.get(i).getNomArticle().toUpperCase().contains(keyword.toUpperCase())) {
+				retour.add(lstAchats.get(i));
+			}
+		}
+		return retour;
+	}
+	
 	private List<ArticleVendu> triVentes(List<ArticleVendu> lstAchats, Integer idVendeur) {
 
 		List<ArticleVendu> lstVentes = new ArrayList<>();
