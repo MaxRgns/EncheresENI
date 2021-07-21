@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 				//TODO ajouter l'erreur dans la page
 			}else {
 				request.getSession().setAttribute("user", user);
-				request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
+				request.getRequestDispatcher("Accueil").forward(request, response);
 			}
 		}
 	}

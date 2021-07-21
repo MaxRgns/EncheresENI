@@ -1,26 +1,26 @@
 package fr.eni.EncheresENI.bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class ArticleVendu {
 	private Integer noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDateTime dateDebutEncheres;
-	private LocalDateTime dateFinEncheres;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
 	private Integer categorie;
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private String etatVente;
-	private Integer vendeur;
+	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	
 
 	public ArticleVendu() {
 	}
 
-	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres, LocalDateTime dateFinEncheres,
-			Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente, Integer vendeur,
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+			Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente, Utilisateur vendeur,
 			Retrait lieuRetrait) {
 		super();
 		this.nomArticle = nomArticle;
@@ -35,9 +35,9 @@ public class ArticleVendu {
 		this.lieuRetrait = lieuRetrait;
 	}
 
-	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente,
-			Integer vendeur, Retrait lieuRetrait) {
+	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente,
+			Utilisateur vendeur, Retrait lieuRetrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -76,19 +76,19 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public LocalDateTime getDateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
-	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public LocalDateTime getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
@@ -124,11 +124,11 @@ public class ArticleVendu {
 		this.etatVente = etatvente;
 	}
 
-	public Integer getVendeur() {
+	public Utilisateur getVendeur() {
 		return vendeur;
 	}
 
-	public void setVendeur(Integer vendeur) {
+	public void setVendeur(Utilisateur vendeur) {
 		this.vendeur = vendeur;
 	}
 
