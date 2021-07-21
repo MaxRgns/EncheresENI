@@ -1,6 +1,7 @@
 package fr.eni.EncheresENI.ihm;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +81,7 @@ public class EditServlet extends HttpServlet {
 			update.setMotDePasse(request.getParameter("mdp"));
 			//TODO Régler problème accents pas pris en compte
 			try {
+				System.out.println(request.getParameter("nom"));
 				manager.updateUser(update);
 				request.getSession().setAttribute("user", update);
 			} catch (BLLException e) {

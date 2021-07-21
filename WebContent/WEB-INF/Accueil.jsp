@@ -3,6 +3,7 @@
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -215,7 +216,9 @@ $("input[value='vente']").change(function() {
  
 
         <div class="row d-flex justify-content-around">
-
+			<!-- Début carte Achats-->
+			Achats <br>
+			<c:forEach items="${Achats}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
                 <div class="row g-0">
@@ -228,15 +231,16 @@ $("input[value='vente']").change(function() {
 
                     <div class="col-md-8">
 
+						
                         <div class="card-body">
 
-                            <h5 class="card-title">Article 1</h5>
+                            <h5 class="card-title">${ArticleVendu.nomArticle}</h5>
 
-                            <p class="card-text">Prix</p>
+                            <p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
 
-                            <p class="card-text">Fin de l'enchère</p>
+                            <p class="card-text">Fin de l'enchère : <tags:localDate date="${ArticleVendu.dateFinEncheres}" pattern="dd-MM-yyyy" /></p>
 
-                            <p class="card-text"><small class="text-muted">Vendeur : <a href="">Vendeur X</a></small></p>
+                            <p class="card-text"><small class="text-muted">Vendeur : <a href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small></p>
 
                         </div>
 
@@ -245,7 +249,11 @@ $("input[value='vente']").change(function() {
                 </div>
 
             </div>
-
+			</c:forEach>
+			
+			<!-- Début carte Vente -->
+			Ventes<br>
+			<c:forEach items="${Ventes}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
                 <div class="row g-0">
@@ -258,15 +266,16 @@ $("input[value='vente']").change(function() {
 
                     <div class="col-md-8">
 
+						
                         <div class="card-body">
 
-                            <h5 class="card-title">Article 2</h5>
+                            <h5 class="card-title">${ArticleVendu.nomArticle}</h5>
 
-                            <p class="card-text">Prix</p>
+                            <p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
 
-                            <p class="card-text">Fin de l'enchère</p>
+                           <p class="card-text">Fin de l'enchère : <tags:localDate date="${ArticleVendu.dateFinEncheres}" pattern="dd-MM-yyyy" /></p>
 
-                            <p class="card-text"><small class="text-muted">Vendeur : <a href="">Vendeur Y</a></small></p>
+                            <p class="card-text"><small class="text-muted">Vendeur : <a href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small></p>
 
                         </div>
 
@@ -275,6 +284,7 @@ $("input[value='vente']").change(function() {
                 </div>
 
             </div>
+			</c:forEach>
         </div>
     </div>
 </body>

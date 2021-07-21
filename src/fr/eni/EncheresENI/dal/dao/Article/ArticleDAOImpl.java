@@ -10,10 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.ArticleVendu;
+import fr.eni.EncheresENI.bo.Utilisateur;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
 import fr.eni.EncheresENI.dal.dao.DAO;
+import fr.eni.EncheresENI.dal.dao.DAOFact;
 
 public class ArticleDAOImpl implements DAO<ArticleVendu> {
+	private DAO<Utilisateur> dao = DAOFact.getUtilisateurDAO();
 	private static final String INSERT_A = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
 	private static final String INSERT_R = "INSERT INTO RETRAITS VALUES (?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLES_VENDUS";
@@ -28,11 +31,11 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			PreparedStatement stmt = connection.prepareStatement(INSERT_A, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, a.getNomArticle());
 			stmt.setString(2, a.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()));
-			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()));
+			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()+" 00:00:00"));
+			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()+" 00:00:00"));
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
-			stmt.setInt(7, a.getVendeur());
+			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
 			stmt.setInt(8, a.getCategorie());
 			int nb = stmt.executeUpdate();
 			if (nb > 0) { // Si la requete a bien recuperee une cle, on l'attribue au nouvel objet
@@ -63,11 +66,11 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			a.setNoArticle(rs.getInt("no_article"));
 			a.setNomArticle(rs.getString("nom_article"));
 			a.setDescription(rs.getString("description"));
-			a.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime());
-			a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
+			a.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime().toLocalDate());
+			a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 			a.setMiseAPrix(rs.getInt("prix_initial"));
 			a.setPrixVente(rs.getInt("prix_vente"));
-			a.setVendeur(rs.getInt("no_utilisateur"));
+			a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
 			a.setCategorie(rs.getInt("no_categorie"));
 			return a;
 		} catch (SQLException e) {
@@ -86,11 +89,11 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setNoArticle(rs.getInt("no_article"));
 				a.setNomArticle(rs.getString("nom_article"));
 				a.setDescription(rs.getString("description"));
-				a.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime());
-				a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
+				a.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime().toLocalDate());
+				a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 				a.setMiseAPrix(rs.getInt("prix_initial"));
 				a.setPrixVente(rs.getInt("prix_vente"));
-				a.setVendeur(rs.getInt("no_utilisateur"));
+				a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
 				a.setCategorie(rs.getInt("no_categorie"));
 				retour.add(a);
 			}
@@ -108,11 +111,11 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			PreparedStatement stmt = connection.prepareStatement(UPDATE);
 			stmt.setString(1, a.getNomArticle());
 			stmt.setString(2, a.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()));
-			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()));
+			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()+"T00:00"));
+			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()+"T00:00"));
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
-			stmt.setInt(7, a.getVendeur());
+			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
 			stmt.setInt(8, a.getCategorie());
 			stmt.setInt(9, a.getNoArticle());
 			stmt.executeUpdate();

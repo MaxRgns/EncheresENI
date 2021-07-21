@@ -1,7 +1,7 @@
 package fr.eni.EncheresENI.ihm;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,7 +47,7 @@ public class VendreServlet extends HttpServlet {
 				enregistrer(request, response);
 				break;
 			}
-			request.getRequestDispatcher("Accueil").forward(request, response);
+			request.getRequestDispatcher("Accueil").forward(request, response); //TODO bug de redirection
 		}
 		List<Categorie> categories = catManager.getCategories();
 		request.getSession().setAttribute("categories", categories);
@@ -56,17 +56,14 @@ public class VendreServlet extends HttpServlet {
 
 	private void enregistrer(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
-
 		ArticleVendu a = new ArticleVendu();
 		a.setNomArticle(request.getParameter("nom"));
 		a.setDescription(request.getParameter("description"));
 		a.setCategorie(Integer.valueOf(request.getParameter("categorie")));
 		a.setMiseAPrix(Integer.valueOf(request.getParameter("prix")));
-		a.setDateDebutEncheres(
-				LocalDateTime.parse(request.getParameter("dateD") + "T" + request.getParameter("timeD")));
-		a.setDateFinEncheres(LocalDateTime.parse(request.getParameter("dateF") + "T" + request.getParameter("timeF")));
-		a.setVendeur(u.getNoUtilisateur());
+		a.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateD")));
+		a.setDateFinEncheres(LocalDate.parse(request.getParameter("dateF")));
+		a.setVendeur((Utilisateur) request.getSession().getAttribute("user"));
 		Retrait r = new Retrait();
 		r.setRue(request.getParameter("rue"));
 		r.setCode_postal(request.getParameter("cp"));
@@ -75,7 +72,7 @@ public class VendreServlet extends HttpServlet {
 		a.setPrixVente(Integer.valueOf(request.getParameter("prix")));
 		a.setEtatvente("Créée"); // TODO Si Débutvente est déjà passé (donc aujourd'hui), doit changer l'état
 		artManager.add(a);
-	}
+	}  
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
