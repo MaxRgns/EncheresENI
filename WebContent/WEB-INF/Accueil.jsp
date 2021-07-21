@@ -108,31 +108,26 @@
                     <input class="form-control me-2" type="search" placeholder="Mot clé de l'article"
 
                         aria-label="Search">
-
-                    <label for="">Catégorie :</label>
+                        
+                    
 
                     <div class="offset-3 col-8">
-
-                        <select class="form-select" aria-label="Default select example">
-
-                            <option selected>Toutes</option>
-
-                            <option value="1">Informatique</option>
-
-                            <option value="2">Ameublement</option>
-
-                            <option value="3">Vêtement</option>
-
-                            <option value="3">Sport&Loisirs</option>
-
-                        </select>
 
                     </div>
                 </div>
                 <button class="btn btn-outline-success" type="submit">Search</button>
 
             </form>
-
+<label for="">Catégorie :</label>
+					<form action="Accueil">
+					    <select name='cat' onchange='if(this.value !=-1) {this.form.submit();}'>
+					    <option value ="-1" selected>----</option>
+					    <option value ="0">Toutes</option>
+                            <c:forEach items="${categories}" var="categorie">
+								<option value = "${categorie.noCategorie}">${categorie.libelle}</option>
+							</c:forEach>
+					    </select>
+					</form>
         </div>
 
         <br>
@@ -217,7 +212,7 @@ $("input[value='vente']").change(function() {
 
         <div class="row d-flex justify-content-around">
 			<!-- Début carte Achats-->
-			Achats <br>
+			<p>Achats</p>
 			<c:forEach items="${Achats}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
@@ -252,7 +247,7 @@ $("input[value='vente']").change(function() {
 			</c:forEach>
 			
 			<!-- Début carte Vente -->
-			Ventes<br>
+			<p>Ventes</p>
 			<c:forEach items="${Ventes}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
