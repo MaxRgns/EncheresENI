@@ -67,8 +67,7 @@ public class RegisterServlet extends HttpServlet {
 			} 
 		request.setAttribute("model", model);
 		request.getRequestDispatcher("WEB-INF/Register.jsp").forward(request, response);
-		request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
-	
+		
 		}
 
 		

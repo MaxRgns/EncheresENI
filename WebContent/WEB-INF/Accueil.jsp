@@ -88,22 +88,21 @@
 						<div class="d-flex bd-highlight mb-3">
             				<div class="me-auto p-2 bd-highlight">
             				 <a href="Accueil"><h1>ENI-Enchères</h1></a></div>
+
             				 <p>${profil.utilisateur.noUtilisateur}</p>
 						            <div class="p-2 bd-highlight"> <a href="Vendre">Vendre un article</a></div>
 						            <div class="p-2 bd-highlight"> <a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon profil</a></div>
 						            <div class="p-2 bd-highlight"> <a href="Login?action=logout">Déconnexion</a></div>
+
         					</div>
 					</c:if>
 			</div>
+<div class="row">
+		<p>Filtres :</p>
+		<div class="row offset-1 col-11 order-1 order-sm-0">
+			<form class="d-flex">
 
-		
-		<div class="row offset-1">
-
-            <p>Filtres :</p>
-
-            <form class="d-flex">
-
-                <div class="col-6">
+                <div class="col-7 col-sm-5 ">
 
                     <input class="form-control me-2" type="search" placeholder="Mot clé de l'article"
 
@@ -114,8 +113,10 @@
                     <div class="offset-3 col-8">
 
                         <select class="form-select" aria-label="Default select example">
-
-                            <option selected>Toutes</option>
+							<c:forEach items="${categories}" var="categorie">
+									<option value = "${categorie.noCategorie}">${categorie.libelle}</option>
+								</c:forEach>
+							                            <option selected>Toutes</option>
 
                             <option value="1">Informatique</option>
 
@@ -123,7 +124,7 @@
 
                             <option value="3">Vêtement</option>
 
-                            <option value="3">Sport&Loisirs</option>
+                            <option value="4">Sport&Loisirs</option>
 
                         </select>
 
@@ -132,32 +133,26 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
 
             </form>
-
+            
         </div>
-
-        <br>
+  
+       
 		<c:if test="${sessionScope.user != null }">
-        <div class="row">
+        <div class="row align-items-end order-0 order-sm-1">
 
-            <div class="offset-1 col-3">
+            <div class="offset-1 col-5 col-md-4 col-lg-3 ">
 
                 <input type="radio" name="AchatVente" id="achat" value="achat" checked> Achats
 
                 <div class="offset-1">
 
-                    <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 100px;">
+                    <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 150px;">
 
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeAchat"> Enchères ouvertes</div>
 
-                            Enchères ouvertes</div>
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeAchat"> Mes ouvertes</div>
 
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
-
-                            Mes ouvertes</div>
-
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeAchat">
-
-                            Enchères remportées</div>
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeAchat"> Enchères remportées</div>
 
                     </div>
 
@@ -165,88 +160,58 @@
 
             </div>
 
-            <div class="col-3">
+            <div class="col-6 col-md-4 col-lg-3 ">
 
                 <input type="radio" name="AchatVente" id="vente" value="vente"> Ventes
 
                 <div class="offset-1">
 
-                    <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 100px;">
+                    <div class="d-flex align-items-start flex-column bd-highlight mb-5" style="height: 150px;">
 
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeVente"> En cours</div>
 
-                            En cours</div>
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeVente"> Non débutées</div>
 
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
-
-                            Non débutées</div>
-
-                        <div class="p-2 bd-highlight"> <input type="checkbox" name="typeVente">
-
-                            Terminées</div>
+                        <div class="p-1 bd-highlight"> <input type="checkbox" name="typeVente"> Terminées</div>
 
                     </div>
-
-                </div>
-<script> 
-$("input[name='typeVente']").prop('disabled', true);
-$("input[name='typeAchat']").prop('disabled', false);
-
-$("input[value='achat']").change(function() {
-	  $("input[name='typeVente']").prop('disabled', true);
-	});
-
-$("input[value='vente']").change(function() {
-	  $("input[name='typeAchat']").prop('disabled', true);
-	});
-
-	// Enable checkbox
-	$("input[value='vente']").change(function() {
-	  $("input[name='typeVente']").prop('disabled', false);
-	});
-	$("input[value='achat']").change(function() {
-		  $("input[name='typeAchat']").prop('disabled', false);
-		});
-
-</script>
-            </div>
-	
+ 				</div>
+        	</div>
         </div>
-		</c:if>
- 
-
+        </c:if>
+    </div>
+	<script> 
+		$("input[name='typeVente']").prop('disabled', true);
+		$("input[name='typeAchat']").prop('disabled', false);
+		
+		$("input[value='achat']").change(function() {
+			$("input[name='typeVente']").prop('disabled', true);
+		});
+		
+		$("input[value='vente']").change(function() {
+			$("input[name='typeAchat']").prop('disabled', true);
+		});
+		
+		// Enable checkbox
+		$("input[value='vente']").change(function() {
+			$("input[name='typeVente']").prop('disabled', false);
+		});
+		$("input[value='achat']").change(function() {
+	  		$("input[name='typeAchat']").prop('disabled', false);
+		});
+		
+	</script>
+           
+          <br>
+          <br>
+          <br>
+              
         <div class="row d-flex justify-content-around">
 			<!-- Début carte Achats-->
 			Achats <br>
 			<c:forEach items="${Achats}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
-                <div class="row g-0">
-
-                    <div class="col-md-4">
-
-                        <img src="https://via.placeholder.com/250" class="img-fluid rounded-start" alt="...">
-
-                    </div>
-
-                    <div class="col-md-8">
-
-						
-                        <div class="card-body">
-
-                            <h5 class="card-title">${ArticleVendu.nomArticle}</h5>
-
-                            <p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
-
-                            <p class="card-text">Fin de l'enchère : <tags:localDate date="${ArticleVendu.dateFinEncheres}" pattern="dd-MM-yyyy" /></p>
-
-                            <p class="card-text"><small class="text-muted">Vendeur : <a href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small></p>
-
-                        </div>
-
-                    </div>
-
-                </div>
 
             </div>
 			</c:forEach>
@@ -287,6 +252,7 @@ $("input[value='vente']").change(function() {
 			</c:forEach>
         </div>
     </div>
+
 </body>
 
 
