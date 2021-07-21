@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,6 @@
 <title>ENI-Enchères</title>
 </head>
 <body>
-	<c:set var = "now" value = "<%= new java.util.Date()%>" />
 	<form action="Vendre" method="post">
 	<label>Article :</label><input type="text" name = "nom" required><br>
 	<label>Description :</label><textarea rows="" cols="" name = "description"></textarea><br>
@@ -22,7 +20,7 @@
 	</select><br>
 	<label>Photo de l'article :</label><input type="file" name="img"><br>
 	<label>Mise à prix :</label><input type="number" name = "prix" required><br>
-	<label>Début de l'enchère :</label><input type="date" name = "dateD" min="${now}"><br>
+	<label>Début de l'enchère :</label><input type="date" name = "dateD" required><br>
 	<label>Fin de l'enchère :</label><input type="date" name = "dateF" required><br>
 	<fieldset>
 		<legend>Retrait</legend>

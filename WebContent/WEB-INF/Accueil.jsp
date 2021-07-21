@@ -100,40 +100,32 @@
 <div class="row">
 		<p>Filtres :</p>
 		<div class="row offset-1 col-11 order-1 order-sm-0">
-			<form class="d-flex">
+			<form action="Accueil" class="d-flex">
 
                 <div class="col-7 col-sm-5 ">
 
                     <input class="form-control me-2" type="search" placeholder="Mot clé de l'article"
 
                         aria-label="Search">
-
-                    <label for="">Catégorie :</label>
+                        
+                    
 
                     <div class="offset-3 col-8">
 
-                        <select class="form-select" aria-label="Default select example">
-							<c:forEach items="${categories}" var="categorie">
-									<option value = "${categorie.noCategorie}">${categorie.libelle}</option>
-								</c:forEach>
-							                            <option selected>Toutes</option>
-
-                            <option value="1">Informatique</option>
-
-                            <option value="2">Ameublement</option>
-
-                            <option value="3">Vêtement</option>
-
-                            <option value="4">Sport&Loisirs</option>
-
-                        </select>
-
+                      <label for="">Catégorie :</label>
+					    <select name='cat' onchange='if(this.value !=-1) {this.form.submit();}'>
+					    <option value ="-1" selected>----</option>
+					    <option value ="0">Toutes</option>
+                            <c:forEach items="${categories}" var="categorie">
+								<option value = "${categorie.noCategorie}">${categorie.libelle}</option>
+							</c:forEach>
+                      </select>
                     </div>
                 </div>
                 <button class="btn btn-outline-success" type="submit">Search</button>
 
             </form>
-            
+
         </div>
   
        
@@ -208,7 +200,7 @@
               
         <div class="row d-flex justify-content-around">
 			<!-- Début carte Achats-->
-			Achats <br>
+			<p>Achats</p>
 			<c:forEach items="${Achats}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
@@ -217,7 +209,7 @@
 			</c:forEach>
 			
 			<!-- Début carte Vente -->
-			Ventes<br>
+			<p>Ventes</p>
 			<c:forEach items="${Ventes}" var="ArticleVendu">
             <div class="card mb-3" style="max-width: 500px;">
 
