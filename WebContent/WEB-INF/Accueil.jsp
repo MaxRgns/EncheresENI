@@ -129,9 +129,10 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
 
             </form>
+            
         </div>
   
-        <br>
+       
 		<c:if test="${sessionScope.user != null }">
         <div class="row align-items-end order-0 order-sm-1">
 
@@ -197,9 +198,10 @@
 		
 	</script>
            
-		
- 
-
+          <br>
+          <br>
+          <br>
+              
         <div class="row d-flex justify-content-around">
 
             <div class="card mb-3" style="max-width: 300px;">
@@ -225,13 +227,10 @@
                             <p class="card-text"><small class="text-muted">Vendeur : <a href="">Vendeur X</a></small></p>
 
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-    </div>
+    	</div>
      </div>
    
 </body>
