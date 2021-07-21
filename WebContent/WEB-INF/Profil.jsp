@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import="fr.eni.EncheresENI.bo.Utilisateur" %>
-    <%@ page import="fr.eni.EncheresENI.ihm.ProfilModel" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="fr.eni.EncheresENI.bo.Utilisateur"%>
+<%@ page import="fr.eni.EncheresENI.ihm.ProfilModel"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,18 +30,55 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 	crossorigin="anonymous"></script>
-<title>ENI-Enchères</title>
+<title>ENI-EnchÃ¨res</title>
 </head>
 <body>
-<h3>Profil de ${profil.utilisateur.pseudo}</h3> 
-<label>Nom : </label> ${profil.utilisateur.nom}<br>
-<label>Prénom : </label> ${profil.utilisateur.prenom}<br>
-<label>E-mail : </label> ${profil.utilisateur.email}<br>
-<label>Téléphone : </label> ${profil.utilisateur.telephone}<br>
-<label>Adresse : </label><br> ${profil.utilisateur.rue}<br>
-${profil.utilisateur.codepostal} ${profil.utilisateur.ville}<br>
-<c:if test="${profil.utilisateur.noUtilisateur == user.noUtilisateur}">
-<a href="Edit">Modifier</a>
-</c:if>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="d-flex bd-highlight mb-3">
+				<div class="me-auto p-2 bd-highlight">
+					<a href="Accueil"><h1>ENI-Enchères</h1></a>
+				</div>
+				
+				<div class="p-2 bd-highlight">
+					<a href="">Vendre un article</a>
+				</div>
+				<div class="p-2 bd-highlight">
+					<a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon
+						profil</a>
+				</div>
+				<div class="p-2 bd-highlight">
+					<a href="Login" id="action">Déconnexion</a>
+				</div>
+
+			</div>
+		
+			<div class="row d-flex justify-content-center">
+				
+				<div class="col-12 col-sm-6">
+				<h3>Profil de ${profil.utilisateur.pseudo}</h3><br>
+					<label>Nom : ${profil.utilisateur.nom}</label> <br><br>
+					<label>Prénom : ${profil.utilisateur.prenom}</label> <br>
+					<br> <label>E-mail : ${profil.utilisateur.email}</label> <br>
+					<br> <label>Téléphone : ${profil.utilisateur.telephone}</label> <br>
+					<br> <label>Adresse : ${profil.utilisateur.rue}, 
+						${profil.utilisateur.codepostal} à
+						${profil.utilisateur.ville}</label> <br><br>
+						<c:if
+						test="${profil.utilisateur.noUtilisateur == user.noUtilisateur}">
+						<label>Crédit : ${user.credit}</label><br><br><br>
+						<div class="d-flex justify-content-between">
+							<form action="Edit">
+								<input class="btn btn-primary" type="submit" value="Modifier">
+							</form>
+						</div>
+						
+					</c:if>
+				</div>	
+			</div>
+			
+		</div>
+	</div>
+
 </body>
 </html>

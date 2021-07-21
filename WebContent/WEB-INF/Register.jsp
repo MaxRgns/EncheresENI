@@ -30,10 +30,10 @@
 <body>
 	<div class="container-fluid">
 		<div class="row d-flex justify-content-center ">
-			<a href="AccueilServlet"><h1>ENI-Enchères</h1></a>
-			<div class="col-6">
-				<h2>Mon compte</h2>
-				<form class="form-group" action="RegisterServlet" method="post">
+			<a href="Accueil"><h1>ENI-Enchères</h1></a>
+			<div class="col-5">
+				<h2>Créer un compte</h2>
+				<form class="form-group" action="Register" method="post">
 
 					<div class="row g-12">
 						<div class="col-sm">
@@ -87,12 +87,10 @@
 					</div>
 					<br>
 					<div class="row g-12">
-						<div class="col-sm d-flex justify-content-end">
+						<div class="col-sm d-flex justify-content-around">
 							<input name="register" class="btn btn-primary" type="submit"
 								value="Créer">
-						</div>
-						<div class="col-sm">
-							<a href="Accueil"><button class="btn btn-primary"
+								<a href="Accueil"><button class="btn btn-primary"
 									type="button">Annuler</button></a>
 						</div>
 					</div>
