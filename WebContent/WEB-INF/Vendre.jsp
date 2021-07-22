@@ -113,13 +113,8 @@
 				<input class="btn btn-primary" type="submit" name="action"
 					value="Enregistrer"> 
 					<a href="Accueil"><input class="btn btn-warning" type="submit" value="Annuler" /></a>
-
 			</form>
-
-
 		</div>
-
-
 	</div>
 </body>
 </html>
