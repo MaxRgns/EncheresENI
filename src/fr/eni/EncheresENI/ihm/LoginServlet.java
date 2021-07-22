@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 				break;
 			}
 		} else { // S'il na pas renvoyé de formulaire
-				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+				request.getRequestDispatcher("Accueil").forward(request, response);
 		}
 	}
 
