@@ -19,10 +19,8 @@ public class ArticleManagerImpl implements ArticleManager {
 	public List<ArticleVendu> getArticles() {
 		List<ArticleVendu> retour = dao.selectAll();
 		for (ArticleVendu a : retour) {
-			System.out.println("Encheres : " + a.getDateFinEncheres());
-			System.out.println("Now : " + LocalDate.now());
 			if (a.getDateFinEncheres().isBefore(LocalDate.now())) {
-				a.setEtatvente("termine");
+				a.setEtatvente("fini");
 			}else if (a.getDateDebutEncheres().isAfter(LocalDate.now())) {
 				a.setEtatvente("cree");
 			}else {
@@ -35,13 +33,21 @@ public class ArticleManagerImpl implements ArticleManager {
 
 	@Override
 	public ArticleVendu getById(Integer id) {
+		ArticleVendu retour = new ArticleVendu();
 		try {
-			return dao.selectById(id);
+			
+			retour=  dao.selectById(id);
+			if (retour.getDateFinEncheres().isBefore(LocalDate.now())) {
+				retour.setEtatvente("fini");
+			}else if (retour.getDateDebutEncheres().isAfter(LocalDate.now())) {
+				retour.setEtatvente("cree");
+			}else {
+				retour.setEtatvente("enCours");
+			} //TODO Manque le retrait effectué
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return retour;
 	}
 
 	@Override

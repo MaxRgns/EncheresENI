@@ -33,7 +33,7 @@
 	crossorigin="anonymous"></script>
 <title>ENI-Enchères</title>
 </head>
-<body>
+<body onload="initArticles()">
 	<div class="container-fluid">
 		<div class="row">
 			<c:if test="${sessionScope.user == null }">
@@ -113,7 +113,7 @@
 		<div class="row">
 			<p>Filtres :</p>
 			<div class="row offset-1 col-11 order-1 order-sm-0">
-				<form action="Accueil" class="d-flex">
+				<form action="Accueil" method="post" class="d-flex">
 
 					<div class="col-7 col-sm-5 ">
 
@@ -134,7 +134,7 @@
 							</select>
 						</div>
 					</div>
-					<button class="btn btn-outline-success" type="submit">Search</button>
+					<button class="btn btn-outline-success" type="submit">Rechercher</button>
 
 				</form>
 
@@ -146,8 +146,7 @@
 
 					<div class="offset-1 col-5 col-md-4 col-lg-3 ">
 
-						<input type="radio" name="AchatVente" id="achat" value="achat"
-							checked> Achats
+						<input type="radio" name="AchatVente" id="achat" value="achat" checked onchange="switchArticles()"> Achats
 
 						<div class="offset-1">
 
@@ -156,16 +155,16 @@
 								style="height: 150px;">
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat"> Enchères
+									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsEC')"> Enchères
 									ouvertes
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat"> Mes ouvertes
+									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsO')"> Mes ouvertes
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat"> Enchères
+									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsR')"> Enchères
 									remportées
 								</div>
 
@@ -177,7 +176,7 @@
 
 					<div class="col-6 col-md-4 col-lg-3 ">
 
-						<input type="radio" name="AchatVente" id="vente" value="vente">
+						<input type="radio" name="AchatVente" id="vente" value="vente" onchange="switchArticles()">
 						Ventes
 
 						<div class="offset-1">
@@ -187,15 +186,15 @@
 								style="height: 150px;">
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente"> En cours
+									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesEC')"> En cours
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente"> Non débutées
+									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesC')"> Non débutées
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente"> Terminées
+									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesF')"> Terminées
 								</div>
 
 							</div>
@@ -224,14 +223,15 @@
 				$("input[name='typeAchat']").prop('disabled', false);
 			});
 		</script>
-
 		<br> <br> <br>
- <button onclick="enCours()">Click Me</button> 
+		<div id="containerAchats">
+		<div id="achatsEC">
 		<div class="row d-flex justify-content-around">
 			<!-- Début carte Achats-->
-			<p>Achats</p>
-			<c:forEach items="${Achats}" var="ArticleVendu">
-				<div class="card mb-3 ${ArticleVendu.etatvente}" style="max-width: 500px;">
+
+			<c:forEach items="${achatsEnCours}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
 					<div class="row g-0">
 
 						<div class="col-md-4">
@@ -269,11 +269,111 @@
 
 				</div>
 			</c:forEach>
+			</div>
+			</div> <!-- Fin achatsEC -->
+			<c:if test="${sessionScope.user != null }">
+			<div id="achatsO">
+		<div class="row d-flex justify-content-around">
+			<!-- Début carte Achats-->
 
+			<c:forEach items="${achatsMesEncheres}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
+					<div class="row g-0">
+
+						<div class="col-md-4">
+
+							<img src="https://via.placeholder.com/250"
+								class="img-fluid rounded-start" alt="...">
+
+						</div>
+
+						<div class="col-md-8">
+
+
+							<div class="card-body">
+
+								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+
+								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+
+								<p class="card-text">
+									Fin de l'enchère :
+									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+										pattern="dd-MM-yyyy" />
+								</p>
+
+								<p class="card-text">
+									<small class="text-muted">Vendeur : <a
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</c:forEach>
+			</div>
+			</div> <!-- Fin achats2 -->
+			<div id="achatsR">
+		<div class="row d-flex justify-content-around">
+			<!-- Début carte Achats-->
+
+			<c:forEach items="${achatsRemporte}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
+					<div class="row g-0">
+
+						<div class="col-md-4">
+
+							<img src="https://via.placeholder.com/250"
+								class="img-fluid rounded-start" alt="...">
+
+						</div>
+
+						<div class="col-md-8">
+
+
+							<div class="card-body">
+
+								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+
+								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+
+								<p class="card-text">
+									Fin de l'enchère :
+									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+										pattern="dd-MM-yyyy" />
+								</p>
+
+								<p class="card-text">
+									<small class="text-muted">Vendeur : <a
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</c:forEach>
+			</div>
+			</div> <!-- Fin achats3 -->
+			</c:if>
+			</div>
 			<!-- Début carte Vente -->
-			<p>Ventes</p>
-			<c:forEach items="${Ventes}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}" class="card mb-3" style="max-width: 500px;">
+			<div id="containerVentes">
+			<div id="ventesEC">
+			
+			<div class="row d-flex justify-content-around">
+			<c:forEach items="${ventesEnCours}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
 
 					<div class="row g-0">
 
@@ -313,17 +413,173 @@
 				</div>
 			</c:forEach>
 		</div>
+		</div><!-- Fin div vente1 -->
+		<div id="ventesC">
+			
+			<div class="row d-flex justify-content-around">
+			<c:forEach items="${ventesCree}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
+
+					<div class="row g-0">
+
+						<div class="col-md-4">
+
+							<img src="https://via.placeholder.com/250"
+								class="img-fluid rounded-start" alt="...">
+
+						</div>
+
+						<div class="col-md-8">
+
+
+							<div class="card-body">
+
+								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+
+								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+
+								<p class="card-text">
+									Fin de l'enchère :
+									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+										pattern="dd-MM-yyyy" />
+								</p>
+
+								<p class="card-text">
+									<small class="text-muted">Vendeur : <a
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</c:forEach>
+		</div>
+		</div><!-- Fin div vente2 -->
+		<div id="ventesF">
+			
+			<div class="row d-flex justify-content-around">
+			<c:forEach items="${ventesFini}" var="ArticleVendu">
+				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+					class="card mb-3" style="max-width: 500px;">
+
+					<div class="row g-0">
+
+						<div class="col-md-4">
+
+							<img src="https://via.placeholder.com/250"
+								class="img-fluid rounded-start" alt="...">
+
+						</div>
+
+						<div class="col-md-8">
+
+
+							<div class="card-body">
+
+								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+
+								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+
+								<p class="card-text">
+									Fin de l'enchère :
+									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+										pattern="dd-MM-yyyy" />
+								</p>
+
+								<p class="card-text">
+									<small class="text-muted">Vendeur : <a
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</c:forEach>
+		</div>
+		</div><!-- Fin div vente3 -->
+		</div>
 	</div>
-<script type="text/javascript">
+	<script type="text/javascript">
+
+
+function disableEncours(element){
+	console.log("test")
+	
+	/* if (element.id.contains("enCours")){
+		console.log("test")
+	} */	
+}
+
 function enCours() {
-  var x = document.getElementsByClassName("enCours");
+	/*
+	Récupère le container des éléments
+	
+	Sur cet élément, tu récupères une liste de tous les enfants de cet éléments
+	
+	Sur chaque enfant ==> display=none si Condition
+	
+	*/
+	var container = document.getElementById("articlesAchats");
+	var enfants = container.childNodes;
+	var ec = enfants.id
+	console.log(ec)
+	enfants.forEach(element =>  disableEncours(element))
+			
+//			enfants.forEach(element =>  (element.id.includes("enCours")?element.style.display=none;:element.style.display=block;)
+	//console.log(enfants);
+	
+/*    var x = document.getElementById("enCours");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
-  }
-}
+  }*/ 
+} 
 
+function test() {
+	var x = document.getElementById("enCours");
+	console.log(x)
+	  /* if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  } */
+}
+function switchDiv(nom){
+	var div = document.getElementById(nom);
+  	if (div.style.display === "none") {
+  		div.style.display = "block";
+  	} else {
+		div.style.display = "none";
+  	}
+
+} 
+	
+function switchArticles() {
+  	var achats = document.getElementById("containerAchats");
+  	var ventes = document.getElementById("containerVentes");
+  	if (achats.style.display === "none") {
+  		achats.style.display = "block";
+    	ventes.style.display = "none";
+  	} else {
+		achats.style.display = "none";
+	  	ventes.style.display = "block";
+  	}
+} 
+
+function initArticles() {
+	var x = document.getElementById("containerVentes");
+	x.style.display = "none";
+} 
 </script>
 
 </body>

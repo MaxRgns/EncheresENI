@@ -64,9 +64,84 @@ public class AccueilServlet extends HttpServlet {
 			lstVentes = triVentes(lstAchats, u.getNoUtilisateur());
 			lstAchats = triAchats(lstAchats, u.getNoUtilisateur());
 		}
+		
+		//split des listes achats et ventes et 6 listes
+		List<ArticleVendu> achatsEnCours = recupAchatsEnCours(lstAchats);
+		List<ArticleVendu> achatsMesEncheres = recupMesEncheres(lstAchats);
+		List<ArticleVendu> achatsRemporte = recupAchatsRemporte(lstAchats);
+		
+		List<ArticleVendu> ventesEnCours = recupVentesEnCours(lstVentes);
+		List<ArticleVendu> ventesCree = recupVenteCree(lstVentes);
+		List<ArticleVendu> ventesFini = recupVentesFini(lstVentes);
+		
 		request.getSession().setAttribute("Achats", lstAchats);
-		request.getSession().setAttribute("Ventes", lstVentes);
+		request.getSession().setAttribute("Ventes", lstVentes); //TODO a supprimer si les ventes s'affichent bien
+		request.getSession().setAttribute("ventesEnCours", ventesEnCours);
+		request.getSession().setAttribute("ventesCree", ventesCree);
+		request.getSession().setAttribute("ventesFini", ventesFini);
+		request.getSession().setAttribute("achatsEnCours", achatsEnCours);
+		request.getSession().setAttribute("achatsMesEncheres", achatsMesEncheres);
+		request.getSession().setAttribute("achatsRemporte", achatsRemporte);
 		request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
+	}
+
+	private List<ArticleVendu> recupAchatsEnCours(List<ArticleVendu> lstAchats) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (ArticleVendu a : lstAchats) {
+			if (a.getEtatvente().equals("enCours")) {
+				retour.add(a);
+			}
+		}
+		return retour;
+	}
+	
+	private List<ArticleVendu> recupMesEncheres(List<ArticleVendu> lstAchats) {
+		List<ArticleVendu> retour = new ArrayList<>();
+//		for (ArticleVendu a : lstAchats) {
+//			//TODO Ajouter une condition qui vérifie si l'utilisateur a encheri  
+//		}
+		return retour;
+	}
+	
+	private List<ArticleVendu> recupAchatsRemporte(List<ArticleVendu> lstAchats) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (ArticleVendu a : lstAchats) {
+			if ((a.getEtatvente().equals("fini"))) {
+				//TODO Ajouter une condition qui vérifie si l'utilisateur est le meilleur encherisseur 
+				retour.add(a);
+			}
+		}
+		return retour;
+	}
+	
+	private List<ArticleVendu> recupVentesEnCours(List<ArticleVendu> ventes) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (ArticleVendu a : ventes) {
+			if (a.getEtatvente().equals("enCours")) {
+				retour.add(a);
+			}
+		}
+		return retour;
+	}
+	
+	private List<ArticleVendu> recupVenteCree(List<ArticleVendu> ventes) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (ArticleVendu a : ventes) {
+			if (a.getEtatvente().equals("cree")) {
+				retour.add(a);
+			}
+		}
+		return retour;
+	}
+	
+	private List<ArticleVendu> recupVentesFini(List<ArticleVendu> ventes) {
+		List<ArticleVendu> retour = new ArrayList<>();
+		for (ArticleVendu a : ventes) {
+			if (a.getEtatvente().equals("fini")) {
+				retour.add(a);
+			}
+		}
+		return retour;
 	}
 
 	private List<ArticleVendu> triCat(List<ArticleVendu> lstAchats, Integer cat) {
