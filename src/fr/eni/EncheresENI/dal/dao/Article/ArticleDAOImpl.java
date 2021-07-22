@@ -16,10 +16,11 @@ import fr.eni.EncheresENI.bo.Utilisateur;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
 import fr.eni.EncheresENI.dal.dao.DAO;
 import fr.eni.EncheresENI.dal.dao.DAOFact;
+import fr.eni.EncheresENI.dal.dao.Enchere.EnchereDAO;
 
 public class ArticleDAOImpl implements DAO<ArticleVendu> {
 	private DAO<Utilisateur> daoU = DAOFact.getUtilisateurDAO();
-	private DAO<Enchere> daoE = DAOFact.getEnchereDAO();
+	private EnchereDAO daoE = DAOFact.getEnchereDAO();
 	private static final String INSERT_A = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
 	private static final String INSERT_R = "INSERT INTO RETRAITS VALUES (?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLES_VENDUS";
@@ -91,7 +92,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			a.setLieuRetrait(r);
 
 			// Récupération des enchères
-			List<Enchere> encheres = daoE.selectAll();
+			List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
 			a.setEncheres(encheres);
 			return a;
 		} catch (SQLException e) {
@@ -129,7 +130,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setLieuRetrait(r);
 
 				// Récupération des enchères
-				List<Enchere> encheres = daoE.selectAll();
+				List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
 				a.setEncheres(encheres);			
 				retour.add(a);
 			}

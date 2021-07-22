@@ -10,9 +10,8 @@ import java.util.List;
 
 import fr.eni.EncheresENI.bo.Enchere;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
-import fr.eni.EncheresENI.dal.dao.DAO;
 
-public class EnchereDAOImpl implements DAO<Enchere> {
+public class EnchereDAOImpl implements EnchereDAO {
 	private static final String INSERT = "INSERT INTO ENCHERES VALUES (?,?,?,?)";
 	private static final String SELECT_BY_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article = ?";
 
@@ -29,9 +28,9 @@ public class EnchereDAOImpl implements DAO<Enchere> {
 		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
-		
 	}
-
+	
+	@Override
 	public List<Enchere> selectByArticle( Integer id) throws SQLException {
 		List<Enchere> retour = new ArrayList<>();
 		try (Connection connection = ConnectionProvider.getConnection()) {
@@ -49,27 +48,4 @@ public class EnchereDAOImpl implements DAO<Enchere> {
 			return retour;
 		}
 	}
-
-	//NOT USED
-	@Override
-	public Enchere selectById(Integer id) throws SQLException {
-		return null;
-	}
-
-	//NOT USED
-	@Override
-	public List<Enchere> selectAll() {
-		return null;
-	}
-	
-	//NOT USED
-	@Override
-	public void update(Enchere object) {	
-	}
-
-	//NOT USED
-	@Override
-	public void delete(Integer id) {		
-	}
-
 }
