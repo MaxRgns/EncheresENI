@@ -86,9 +86,9 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			ResultSet rs2 = stmt2.executeQuery();
 			rs2.next(); // Passage à la première (et dernière) ligne du résultat de requête
 			Retrait r = new Retrait();
-			r.setRue(rs.getString("rue"));
-			r.setCode_postal(rs.getString("code_postal"));
-			r.setVille(rs.getString("ville"));
+			r.setRue(rs2.getString("rue"));
+			r.setCode_postal(rs2.getString("code_postal"));
+			r.setVille(rs2.getString("ville"));
 			a.setLieuRetrait(r);
 
 			// Récupération des enchères
@@ -118,19 +118,25 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 				a.setCategorie(rs.getInt("no_categorie"));
 				
+				System.out.println(a);
 				// Récupération du lieu de retrait associé
 				PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
 				stmt2.setInt(1, a.getNoArticle());
 				ResultSet rs2 = stmt2.executeQuery();
 				rs2.next(); // Passage à la première (et dernière) ligne du résultat de requête
 				Retrait r = new Retrait();
-				r.setRue(rs.getString("rue"));
-				r.setCode_postal(rs.getString("code_postal"));
-				r.setVille(rs.getString("ville"));
+				r.setRue(rs2.getString("rue"));
+				r.setCode_postal(rs2.getString("code_postal"));
+				r.setVille(rs2.getString("ville"));
 				a.setLieuRetrait(r);
 
 				// Récupération des enchères
-				List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
+				List<Enchere> encheres = null;
+				try {
+					encheres = daoE.selectByArticle(a.getNoArticle());
+				} catch (Exception e) {
+					System.err.println("erreur ArticleDAO");
+				}
 				a.setEncheres(encheres);			
 				retour.add(a);
 			}

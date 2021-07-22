@@ -18,6 +18,7 @@ public class ArticleManagerImpl implements ArticleManager {
 	@Override
 	public List<ArticleVendu> getArticles() {
 		List<ArticleVendu> retour = dao.selectAll();
+		System.out.println(retour);
 		for (ArticleVendu a : retour) {
 			if (a.getDateFinEncheres().isBefore(LocalDate.now())) {
 				a.setEtatvente("fini");
