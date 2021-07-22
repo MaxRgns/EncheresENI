@@ -10,19 +10,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.ArticleVendu;
+import fr.eni.EncheresENI.bo.Enchere;
+import fr.eni.EncheresENI.bo.Retrait;
 import fr.eni.EncheresENI.bo.Utilisateur;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
 import fr.eni.EncheresENI.dal.dao.DAO;
 import fr.eni.EncheresENI.dal.dao.DAOFact;
+import fr.eni.EncheresENI.dal.dao.Enchere.EnchereDAO;
 
 public class ArticleDAOImpl implements DAO<ArticleVendu> {
-	private DAO<Utilisateur> dao = DAOFact.getUtilisateurDAO();
+	private DAO<Utilisateur> daoU = DAOFact.getUtilisateurDAO();
+	private EnchereDAO daoE = DAOFact.getEnchereDAO();
 	private static final String INSERT_A = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
 	private static final String INSERT_R = "INSERT INTO RETRAITS VALUES (?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLES_VENDUS";
 	private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
+	private static final String SELECT_R_BY_ID = "SELECT * FROM RETRAITS WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, "
 			+ "date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article = ?";
+	private static final String UPDATE_R = "UPDATE RETRAITS SET rue=?, code_postal=?, ville=? WHERE no_article = ?";
 	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
@@ -31,8 +37,8 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			PreparedStatement stmt = connection.prepareStatement(INSERT_A, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, a.getNomArticle());
 			stmt.setString(2, a.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()+" 00:00:00"));
-			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()+" 00:00:00"));
+			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres() + " 00:00:00"));
+			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres() + " 00:00:00"));
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
 			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
@@ -50,6 +56,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			stmt2.setString(3, a.getLieuRetrait().getCode_postal());
 			stmt2.setString(4, a.getLieuRetrait().getVille());
 			stmt2.executeUpdate();
+
 		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
@@ -70,8 +77,23 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 			a.setMiseAPrix(rs.getInt("prix_initial"));
 			a.setPrixVente(rs.getInt("prix_vente"));
-			a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
+			a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 			a.setCategorie(rs.getInt("no_categorie"));
+
+			// Récupération du lieu de retrait associé
+			PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
+			stmt2.setInt(1, id);
+			ResultSet rs2 = stmt2.executeQuery();
+			rs2.next(); // Passage à la première (et dernière) ligne du résultat de requête
+			Retrait r = new Retrait();
+			r.setRue(rs2.getString("rue"));
+			r.setCode_postal(rs2.getString("code_postal"));
+			r.setVille(rs2.getString("ville"));
+			a.setLieuRetrait(r);
+
+			// Récupération des enchères
+			List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
+			a.setEncheres(encheres);
 			return a;
 		} catch (SQLException e) {
 			throw new SQLException("Probleme d'accès à la base de données");
@@ -93,8 +115,29 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 				a.setMiseAPrix(rs.getInt("prix_initial"));
 				a.setPrixVente(rs.getInt("prix_vente"));
-				a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
+				a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 				a.setCategorie(rs.getInt("no_categorie"));
+				
+				System.out.println(a);
+				// Récupération du lieu de retrait associé
+				PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
+				stmt2.setInt(1, a.getNoArticle());
+				ResultSet rs2 = stmt2.executeQuery();
+				rs2.next(); // Passage à la première (et dernière) ligne du résultat de requête
+				Retrait r = new Retrait();
+				r.setRue(rs2.getString("rue"));
+				r.setCode_postal(rs2.getString("code_postal"));
+				r.setVille(rs2.getString("ville"));
+				a.setLieuRetrait(r);
+
+				// Récupération des enchères
+				List<Enchere> encheres = null;
+				try {
+					encheres = daoE.selectByArticle(a.getNoArticle());
+				} catch (Exception e) {
+					System.err.println("erreur ArticleDAO");
+				}
+				a.setEncheres(encheres);			
 				retour.add(a);
 			}
 			return retour;
@@ -111,14 +154,22 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			PreparedStatement stmt = connection.prepareStatement(UPDATE);
 			stmt.setString(1, a.getNomArticle());
 			stmt.setString(2, a.getDescription());
-			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres()+"T00:00"));
-			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres()+"T00:00"));
+			stmt.setTimestamp(3, Timestamp.valueOf(a.getDateDebutEncheres() + "T00:00"));
+			stmt.setTimestamp(4, Timestamp.valueOf(a.getDateFinEncheres() + "T00:00"));
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
 			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
 			stmt.setInt(8, a.getCategorie());
 			stmt.setInt(9, a.getNoArticle());
 			stmt.executeUpdate();
+			
+			PreparedStatement stmt2 = connection.prepareStatement(UPDATE_R);
+			stmt2.setString(1, a.getLieuRetrait().getRue());
+			stmt2.setString(2, a.getLieuRetrait().getCode_postal());
+			stmt2.setString(3, a.getLieuRetrait().getVille());
+			stmt2.setInt(4, a.getNoArticle());			
+			stmt2.executeUpdate();
+			
 		} catch (SQLException e) {
 			System.err.println("Probleme d'accès à la base de données");
 		}
