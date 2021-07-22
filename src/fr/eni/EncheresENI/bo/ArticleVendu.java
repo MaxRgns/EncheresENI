@@ -146,6 +146,10 @@ public class ArticleVendu {
 	public List<Enchere> getEncheres(){
 		return encheres;
 	}
+	
+	public void setEncheres(List<Enchere> lst) {
+		this.encheres = lst;
+	}
 
 	@Override
 	public String toString() {

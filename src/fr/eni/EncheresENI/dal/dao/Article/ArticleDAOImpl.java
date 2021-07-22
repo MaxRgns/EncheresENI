@@ -16,15 +16,16 @@ import fr.eni.EncheresENI.bo.Utilisateur;
 import fr.eni.EncheresENI.dal.ConnectionProvider;
 import fr.eni.EncheresENI.dal.dao.DAO;
 import fr.eni.EncheresENI.dal.dao.DAOFact;
+import fr.eni.EncheresENI.dal.dao.Enchere.EnchereDAO;
 
 public class ArticleDAOImpl implements DAO<ArticleVendu> {
-	private DAO<Utilisateur> dao = DAOFact.getUtilisateurDAO();
+	private DAO<Utilisateur> daoU = DAOFact.getUtilisateurDAO();
+	private EnchereDAO daoE = DAOFact.getEnchereDAO();
 	private static final String INSERT_A = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
 	private static final String INSERT_R = "INSERT INTO RETRAITS VALUES (?,?,?,?)";
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLES_VENDUS";
 	private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
 	private static final String SELECT_R_BY_ID = "SELECT * FROM RETRAITS WHERE no_article = ?";
-	private static final String SELECT_E_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, "
 			+ "date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article = ?";
 	private static final String UPDATE_R = "UPDATE RETRAITS SET rue=?, code_postal=?, ville=? WHERE no_article = ?";
@@ -76,7 +77,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 			a.setMiseAPrix(rs.getInt("prix_initial"));
 			a.setPrixVente(rs.getInt("prix_vente"));
-			a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
+			a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 			a.setCategorie(rs.getInt("no_categorie"));
 
 			// Récupération du lieu de retrait associé
@@ -90,18 +91,9 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			r.setVille(rs.getString("ville"));
 			a.setLieuRetrait(r);
 
-			// Récupération du lieu de retrait associé
-			PreparedStatement stmt3 = connection.prepareStatement(SELECT_E_BY_ID);
-			stmt3.setInt(1, id);
-			ResultSet rs3 = stmt3.executeQuery();
-			while (rs3.next()) {
-				Enchere e = new Enchere();
-				e.setDateEnchere(rs.getTimestamp("date_enchere").toLocalDateTime());
-				e.setMontant_enchere(rs.getInt("montant_enchere"));
-				e.setEncherisseur(rs.getInt("no_utilisateur"));
-				e.setArticle(rs.getInt("no_article"));
-				a.getEncheres().add(e);
-			}
+			// Récupération des enchères
+			List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
+			a.setEncheres(encheres);
 			return a;
 		} catch (SQLException e) {
 			throw new SQLException("Probleme d'accès à la base de données");
@@ -123,7 +115,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime().toLocalDate());
 				a.setMiseAPrix(rs.getInt("prix_initial"));
 				a.setPrixVente(rs.getInt("prix_vente"));
-				a.setVendeur(dao.selectById(rs.getInt("no_utilisateur")));
+				a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 				a.setCategorie(rs.getInt("no_categorie"));
 				
 				// Récupération du lieu de retrait associé
@@ -137,18 +129,9 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				r.setVille(rs.getString("ville"));
 				a.setLieuRetrait(r);
 
-				// Récupération du lieu de retrait associé
-				PreparedStatement stmt3 = connection.prepareStatement(SELECT_E_BY_ID);
-				stmt3.setInt(1, a.getNoArticle());
-				ResultSet rs3 = stmt3.executeQuery();
-				while (rs3.next()) {
-					Enchere e = new Enchere();
-					e.setDateEnchere(rs.getTimestamp("date_enchere").toLocalDateTime());
-					e.setMontant_enchere(rs.getInt("montant_enchere"));
-					e.setEncherisseur(rs.getInt("no_utilisateur"));
-					e.setArticle(rs.getInt("no_article"));
-					a.getEncheres().add(e);
-				}				
+				// Récupération des enchères
+				List<Enchere> encheres = daoE.selectByArticle(a.getNoArticle());
+				a.setEncheres(encheres);			
 				retour.add(a);
 			}
 			return retour;
