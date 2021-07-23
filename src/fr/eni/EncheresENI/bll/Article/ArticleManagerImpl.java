@@ -1,6 +1,7 @@
 package fr.eni.EncheresENI.bll.Article;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.ArticleVendu;
@@ -16,18 +17,37 @@ public class ArticleManagerImpl implements ArticleManager {
 
 	@Override
 	public List<ArticleVendu> getArticles() {
-		return dao.selectAll();
+		List<ArticleVendu> retour = dao.selectAll();
+		for (ArticleVendu a : retour) {
+			if (a.getDateFinEncheres().isBefore(LocalDate.now())) {
+				a.setEtatvente("fini");
+			}else if (a.getDateDebutEncheres().isAfter(LocalDate.now())) {
+				a.setEtatvente("cree");
+			}else {
+				a.setEtatvente("enCours");
+			} //TODO Manque le retrait effectué
+		}
+		
+		return retour;
 	}
 
 	@Override
 	public ArticleVendu getById(Integer id) {
+		ArticleVendu retour = new ArticleVendu();
 		try {
-			return dao.selectById(id);
+			
+			retour=  dao.selectById(id);
+			if (retour.getDateFinEncheres().isBefore(LocalDate.now())) {
+				retour.setEtatvente("fini");
+			}else if (retour.getDateDebutEncheres().isAfter(LocalDate.now())) {
+				retour.setEtatvente("cree");
+			}else {
+				retour.setEtatvente("enCours");
+			} //TODO Manque le retrait effectué
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return retour;
 	}
 
 	@Override

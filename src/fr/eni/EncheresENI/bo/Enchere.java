@@ -1,42 +1,53 @@
 package fr.eni.EncheresENI.bo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Enchere {
-	private LocalDate dateEnchere;
-	private Double montant_enchere;
-	private Utilisateur encherisseur;
-	private ArticleVendu article;
+	private LocalDateTime dateEnchere;
+	private Integer montant_enchere;
+	private Integer encherisseur;
+	private Integer article;
 
-	public Enchere(LocalDate dateEnchere, Double montant_enchere, Utilisateur encherisseur, ArticleVendu article) {
+	public Enchere(LocalDateTime dateEnchere, Integer montant_enchere, Integer encherisseur, Integer article) {
 		this.dateEnchere = dateEnchere;
 		this.montant_enchere = montant_enchere;
 		this.encherisseur = encherisseur;
 		this.article = article;
 	}
 
-	public LocalDate getDateEnchere() {
+	public Enchere() {
+	}
+
+	public LocalDateTime getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchere(LocalDate dateEnchere) {
+	public void setDateEnchere(LocalDateTime dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
-	public Double getMontant_enchere() {
+	public Integer getMontant_enchere() {
 		return montant_enchere;
 	}
 
-	public void setMontant_enchere(Double montant_enchere) {
+	public void setMontant_enchere(Integer montant_enchere) {
 		this.montant_enchere = montant_enchere;
 	}
 
-	public Utilisateur getEncherisseur() {
+	public Integer getEncherisseur() {
 		return encherisseur;
 	}
+	
+	public void setEncherisseur(Integer id) {
+		this.encherisseur = id;
+	}
 
-	public ArticleVendu getArticle() {
+	public Integer getArticle() {
 		return article;
+	}
+	
+	public void setArticle(Integer id) {
+		this.article = id;
 	}
 
 	@Override
