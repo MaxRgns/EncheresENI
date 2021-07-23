@@ -52,6 +52,7 @@ public class VendreServlet extends HttpServlet {
 		List<Categorie> categories = catManager.getCategories();
 		request.getSession().setAttribute("categories", categories);
 		request.getRequestDispatcher("WEB-INF/Vendre.jsp").forward(request, response);
+		
 	}
 
 	private void enregistrer(HttpServletRequest request, HttpServletResponse response)

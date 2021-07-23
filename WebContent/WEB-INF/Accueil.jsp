@@ -39,9 +39,9 @@
 			<c:if test="${sessionScope.user == null }">
 				<div class="d-flex bd-highlight">
 					<div class="me-auto p-2 bd-highlight">
-						<a href="Accueil">
-							<h1>ENI-Enchères</h1>
-						</a>
+						<h1>
+							<a href="Accueil">ENI-Enchères</a>
+						</h1>
 					</div>
 					<div class="p-2 bd-highlight">
 						<button type="button" class="btn btn-primary"
@@ -95,7 +95,7 @@
 						<a href="Accueil"><h1>ENI-Enchères</h1></a>
 					</div>
 
-					<p>${profil.utilisateur.noUtilisateur}</p>
+
 					<div class="p-2 bd-highlight">
 						<a href="Vendre">Vendre un article</a>
 					</div>
@@ -128,10 +128,12 @@
 								onchange='if(this.value !=-1) {this.form.submit();}'>
 								<option value="-1" selected>----</option>
 								<option value="0">Toutes</option>
+
 								<c:forEach items="${categories}" var="categorie">
 									<option value="${categorie.noCategorie}">${categorie.libelle}</option>
 								</c:forEach>
 							</select>
+
 						</div>
 					</div>
 					<button class="btn btn-outline-success" type="submit">Rechercher</button>
@@ -401,9 +403,12 @@
 
 								<p class="card-text">
 									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
 								</p>
-
+								<p class="card-text">
+									<small class="text-muted"><a
+										href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+								</p>
 							</div>
 
 						</div>
@@ -447,7 +452,7 @@
 
 								<p class="card-text">
 									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
 								</p>
 
 							</div>
