@@ -148,7 +148,8 @@
 
 					<div class="offset-1 col-5 col-md-4 col-lg-3 ">
 
-						<input type="radio" name="AchatVente" id="achat" value="achat" checked onchange="switchArticles()"> Achats
+						<input type="radio" name="AchatVente" id="achat" value="achat"
+							checked onchange="switchArticles()"> Achats
 
 						<div class="offset-1">
 
@@ -157,17 +158,18 @@
 								style="height: 150px;">
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsEC')"> Enchères
-									ouvertes
+									<input type="checkbox" name="typeAchat" checked
+										onchange="switchDiv('achatsEC')"> Enchères ouvertes
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsO')"> Mes ouvertes
+									<input type="checkbox" name="typeAchat" checked
+										onchange="switchDiv('achatsO')"> Mes ouvertes
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeAchat" checked onchange="switchDiv('achatsR')"> Enchères
-									remportées
+									<input type="checkbox" name="typeAchat" checked
+										onchange="switchDiv('achatsR')"> Enchères remportées
 								</div>
 
 							</div>
@@ -178,8 +180,8 @@
 
 					<div class="col-6 col-md-4 col-lg-3 ">
 
-						<input type="radio" name="AchatVente" id="vente" value="vente" onchange="switchArticles()">
-						Ventes
+						<input type="radio" name="AchatVente" id="vente" value="vente"
+							onchange="switchArticles()"> Ventes
 
 						<div class="offset-1">
 
@@ -188,15 +190,18 @@
 								style="height: 150px;">
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesEC')"> En cours
+									<input type="checkbox" name="typeVente" checked
+										onchange="switchDiv('ventesEC')"> En cours
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesC')"> Non débutées
+									<input type="checkbox" name="typeVente" checked
+										onchange="switchDiv('ventesC')"> Non débutées
 								</div>
 
 								<div class="p-1 bd-highlight">
-									<input type="checkbox" name="typeVente" checked onchange="switchDiv('ventesF')"> Terminées
+									<input type="checkbox" name="typeVente" checked
+										onchange="switchDiv('ventesF')"> Terminées
 								</div>
 
 							</div>
@@ -227,290 +232,324 @@
 		</script>
 		<br> <br> <br>
 		<div id="containerAchats">
-		<div id="achatsEC">
-		<div class="row d-flex justify-content-around">
-			<!-- Début carte Achats-->
+			<div id="achatsEC">
+				<div class="row d-flex justify-content-around">
+					<!-- Début carte Achats-->
 
-			<c:forEach items="${achatsEnCours}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
-					<div class="row g-0">
+					<c:forEach items="${achatsEnCours}" var="ArticleVendu">
+						<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+							class="card mb-3" style="max-width: 500px;">
+							<div class="row g-0">
 
-						<div class="col-md-4">
+								<div class="col-md-4">
 
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
+									<img src="https://via.placeholder.com/250"
+										class="img-fluid rounded-start" alt="...">
 
-						</div>
+								</div>
 
-						<div class="col-md-8">
+								<div class="col-md-8">
 
 
-							<div class="card-body">
+									<div class="card-body">
 
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+										<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
 
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+										<p class="card-text">Prix : ${ArticleVendu.prixVente}
+											points</p>
 
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
+										<p class="card-text">
+											Fin de l'enchère :
+											<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+												pattern="dd-MM-yyyy" />
+										</p>
 
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
-								</p>
+										<p class="card-text">
+											<small class="text-muted">Vendeur : <a
+												href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+										</p>
+
+										<p class="card-text">
+											<small class="text-muted"><a
+												href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+										</p>
+
+									</div>
+
+								</div>
 
 							</div>
 
 						</div>
-
-					</div>
-
+					</c:forEach>
 				</div>
-			</c:forEach>
 			</div>
-			</div> <!-- Fin achatsEC -->
+			<!-- Fin achatsEC -->
 			<c:if test="${sessionScope.user != null }">
-			<div id="achatsO">
-		<div class="row d-flex justify-content-around">
-			<!-- Début carte Achats-->
+				<div id="achatsO">
+					<div class="row d-flex justify-content-around">
+						<!-- Début carte Achats-->
 
-			<c:forEach items="${achatsMesEncheres}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
-					<div class="row g-0">
+						<c:forEach items="${achatsMesEncheres}" var="ArticleVendu">
+							<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+								class="card mb-3" style="max-width: 500px;">
+								<div class="row g-0">
 
-						<div class="col-md-4">
+									<div class="col-md-4">
 
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
+										<img src="https://via.placeholder.com/250"
+											class="img-fluid rounded-start" alt="...">
 
-						</div>
+									</div>
 
-						<div class="col-md-8">
-
-
-							<div class="card-body">
-
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
-
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
-
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
-
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
-								</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</c:forEach>
-			</div>
-			</div> <!-- Fin achats2 -->
-			<div id="achatsR">
-		<div class="row d-flex justify-content-around">
-			<!-- Début carte Achats-->
-
-			<c:forEach items="${achatsRemporte}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
-					<div class="row g-0">
-
-						<div class="col-md-4">
-
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
-
-						</div>
-
-						<div class="col-md-8">
+									<div class="col-md-8">
 
 
-							<div class="card-body">
+										<div class="card-body">
 
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+											<h5 class="card-title"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">${ArticleVendu.nomArticle}</a></h5>
 
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+											<p class="card-text">Prix : ${ArticleVendu.prixVente}
+												points</p>
 
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
+											<p class="card-text">
+												Fin de l'enchère :
+												<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+													pattern="dd-MM-yyyy" />
+											</p>
 
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
-								</p>
+											<p class="card-text">
+												<small class="text-muted">Vendeur : <a
+													href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+											</p>
+
+										</div>
+
+									</div>
+
+								</div>
 
 							</div>
-
-						</div>
-
+						</c:forEach>
 					</div>
-
 				</div>
-			</c:forEach>
-			</div>
-			</div> <!-- Fin achats3 -->
+				<!-- Fin achats2 -->
+				<div id="achatsR">
+					<div class="row d-flex justify-content-around">
+						<!-- Début carte Achats-->
+
+						<c:forEach items="${achatsRemporte}" var="ArticleVendu">
+							<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+								class="card mb-3" style="max-width: 500px;">
+								<div class="row g-0">
+
+									<div class="col-md-4">
+
+										<img src="https://via.placeholder.com/250"
+											class="img-fluid rounded-start" alt="...">
+
+									</div>
+
+									<div class="col-md-8">
+
+
+										<div class="card-body">
+
+											<h5 class="card-title"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">${ArticleVendu.nomArticle}</a></h5>
+
+											<p class="card-text">Prix : ${ArticleVendu.prixVente}
+												points</p>
+
+											<p class="card-text">
+												Fin de l'enchère :
+												<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+													pattern="dd-MM-yyyy" />
+											</p>
+
+											<p class="card-text">
+												<small class="text-muted">Vendeur : <a
+													href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+											</p>
+
+											<p class="card-text">
+												<small class="text-muted"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+											</p>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<!-- Fin achats3 -->
 			</c:if>
-			</div>
-			<!-- Début carte Vente -->
-			<div id="containerVentes">
+		</div>
+		<!-- Début carte Vente -->
+		<div id="containerVentes">
 			<div id="ventesEC">
-			
-			<div class="row d-flex justify-content-around">
-			<c:forEach items="${ventesEnCours}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
 
-					<div class="row g-0">
+				<div class="row d-flex justify-content-around">
+					<c:forEach items="${ventesEnCours}" var="ArticleVendu">
+						<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+							class="card mb-3" style="max-width: 500px;">
 
-						<div class="col-md-4">
+							<div class="row g-0">
 
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
+								<div class="col-md-4">
 
-						</div>
+									<img src="https://via.placeholder.com/250"
+										class="img-fluid rounded-start" alt="...">
 
-						<div class="col-md-8">
+								</div>
 
-
-							<div class="card-body">
-
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
-
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
-
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
-
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
-								</p>
-								<p class="card-text">
-									<small class="text-muted"><a
-										href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
-								</p>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</c:forEach>
-		</div>
-		</div><!-- Fin div vente1 -->
-		<div id="ventesC">
-			
-			<div class="row d-flex justify-content-around">
-			<c:forEach items="${ventesCree}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
-
-					<div class="row g-0">
-
-						<div class="col-md-4">
-
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
-
-						</div>
-
-						<div class="col-md-8">
+								<div class="col-md-8">
 
 
-							<div class="card-body">
+									<div class="card-body">
 
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+										<h5 class="card-title"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">${ArticleVendu.nomArticle}</a></h5>
 
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+										<p class="card-text">Prix : ${ArticleVendu.prixVente}
+											points</p>
 
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
+										<p class="card-text">
+											Fin de l'enchère :
+											<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+												pattern="dd-MM-yyyy" />
+										</p>
 
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
-								</p>
+										<p class="card-text">
+											<small class="text-muted">Vendeur : <a
+												href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
+										</p>
+										<p class="card-text">
+											<small class="text-muted"><a
+												href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+										</p>
+									</div>
+
+								</div>
 
 							</div>
 
 						</div>
-
-					</div>
-
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
-		</div><!-- Fin div vente2 -->
-		<div id="ventesF">
-			
-			<div class="row d-flex justify-content-around">
-			<c:forEach items="${ventesFini}" var="ArticleVendu">
-				<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
-					class="card mb-3" style="max-width: 500px;">
+			</div>
+			<!-- Fin div vente1 -->
+			<div id="ventesC">
 
-					<div class="row g-0">
+				<div class="row d-flex justify-content-around">
+					<c:forEach items="${ventesCree}" var="ArticleVendu">
+						<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+							class="card mb-3" style="max-width: 500px;">
 
-						<div class="col-md-4">
+							<div class="row g-0">
 
-							<img src="https://via.placeholder.com/250"
-								class="img-fluid rounded-start" alt="...">
+								<div class="col-md-4">
 
-						</div>
+									<img src="https://via.placeholder.com/250"
+										class="img-fluid rounded-start" alt="...">
 
-						<div class="col-md-8">
+								</div>
+
+								<div class="col-md-8">
 
 
-							<div class="card-body">
+									<div class="card-body">
 
-								<h5 class="card-title">${ArticleVendu.nomArticle}</h5>
+										<h5 class="card-title"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">${ArticleVendu.nomArticle}</a></h5>
 
-								<p class="card-text">Prix : ${ArticleVendu.prixVente} points</p>
+										<p class="card-text">Prix : ${ArticleVendu.prixVente}
+											points</p>
 
-								<p class="card-text">
-									Fin de l'enchère :
-									<tags:localDate date="${ArticleVendu.dateFinEncheres}"
-										pattern="dd-MM-yyyy" />
-								</p>
+										<p class="card-text">
+											Fin de l'enchère :
+											<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+												pattern="dd-MM-yyyy" />
+										</p>
 
-								<p class="card-text">
-									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
-								</p>
+										<p class="card-text">
+											<small class="text-muted">Vendeur : <a
+												href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
+										</p>
+										<p class="card-text">
+											<small class="text-muted"><a
+												href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+										</p>
+									</div>
+
+								</div>
 
 							</div>
 
 						</div>
-
-					</div>
-
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
-		</div><!-- Fin div vente3 -->
+			</div>
+			<!-- Fin div vente2 -->
+			<div id="ventesF">
+
+				<div class="row d-flex justify-content-around">
+					<c:forEach items="${ventesFini}" var="ArticleVendu">
+						<div id="${ArticleVendu.etatvente}${ArticleVendu.noArticle}"
+							class="card mb-3" style="max-width: 500px;">
+
+							<div class="row g-0">
+
+								<div class="col-md-4">
+
+									<img src="https://via.placeholder.com/250"
+										class="img-fluid rounded-start" alt="...">
+
+								</div>
+
+								<div class="col-md-8">
+
+
+									<div class="card-body">
+
+										<h5 class="card-title"><a
+													href="Enchere?idArticle=${ArticleVendu.noArticle}">${ArticleVendu.nomArticle}</a></h5>
+
+										<p class="card-text">Prix : ${ArticleVendu.prixVente}
+											points</p>
+
+										<p class="card-text">
+											Fin de l'enchère :
+											<tags:localDate date="${ArticleVendu.dateFinEncheres}"
+												pattern="dd-MM-yyyy" />
+										</p>
+
+										<p class="card-text">
+											<small class="text-muted">Vendeur : <a
+												href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
+										</p>
+										<p class="card-text">
+											<small class="text-muted"><a
+												href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+										</p>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<!-- Fin div vente3 -->
 		</div>
 	</div>
 	<script type="text/javascript">
