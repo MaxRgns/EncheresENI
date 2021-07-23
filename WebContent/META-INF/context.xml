@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource  name="jdbc/contactDb"  
+    <Resource  name="jdbc/EncheresDB"  
     		  
     		  driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
     		  type="javax.sql.DataSource"
     		  
-    		  url="jdbc:sqlserver://127.0.0.1:1434;databasename=ENCHERES"
+    		  url="jdbc:sqlserver://127.0.0.1:1433;databasename=ENCHERES"
               username="sa"  
               password="Pa$$w0rd"  
     
@@ -13,6 +13,5 @@
               maxIdle="10"  
               maxWait="100000"
              />
-              
-              
+>>>>>>> dev
  </Context>

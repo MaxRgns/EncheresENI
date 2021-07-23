@@ -1,6 +1,7 @@
 package fr.eni.EncheresENI.bo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleVendu {
@@ -9,21 +10,21 @@ public class ArticleVendu {
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
-	private String categorie;
-	private Double miseAPrix;
-	private Double prixVente;
+	private Integer categorie;
+	private Integer miseAPrix;
+	private Integer prixVente;
 	private String etatVente;
 	private Utilisateur vendeur;
-	private List<Enchere> lstEncheres;
 	private Retrait lieuRetrait;
-	private Categorie categorieArticle;
+	private List<Enchere> encheres = new ArrayList<>();
+	
 
 	public ArticleVendu() {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			String categorie, Double miseAPrix, Double prixVente, String etatvente, Utilisateur vendeur,
-			List<Enchere> lstEncheres, Retrait lieuRetrait, Categorie categorieArticle) {
+			Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente, Utilisateur vendeur,
+			Retrait lieuRetrait) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -34,14 +35,12 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatvente;
 		this.vendeur = vendeur;
-		this.lstEncheres = lstEncheres;
 		this.lieuRetrait = lieuRetrait;
-		this.categorieArticle = categorieArticle;
 	}
 
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, String categorie, Double miseAPrix, Double prixVente, String etatvente,
-			Utilisateur vendeur, List<Enchere> lstEncheres, Retrait lieuRetrait, Categorie categorieArticle) {
+			LocalDate dateFinEncheres, Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente,
+			Utilisateur vendeur, Retrait lieuRetrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -53,9 +52,7 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatvente;
 		this.vendeur = vendeur;
-		this.lstEncheres = lstEncheres;
 		this.lieuRetrait = lieuRetrait;
-		this.categorieArticle = categorieArticle;
 	}
 
 	public Integer getNoArticle() {
@@ -98,27 +95,27 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public String getCategorie() {
+	public Integer getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(String categorie) {
+	public void setCategorie(Integer categorie) {
 		this.categorie = categorie;
 	}
 
-	public Double getMiseAPrix() {
+	public Integer getMiseAPrix() {
 		return miseAPrix;
 	}
 
-	public void setMiseAPrix(Double miseAPrix) {
+	public void setMiseAPrix(Integer miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 
-	public Double getPrixVente() {
+	public Integer getPrixVente() {
 		return prixVente;
 	}
 
-	public void setPrixVente(Double prixVente) {
+	public void setPrixVente(Integer prixVente) {
 		this.prixVente = prixVente;
 	}
 
@@ -138,14 +135,6 @@ public class ArticleVendu {
 		this.vendeur = vendeur;
 	}
 
-	public List<Enchere> getLstEncheres() {
-		return lstEncheres;
-	}
-
-	public void setLstEncheres(List<Enchere> lstEncheres) {
-		this.lstEncheres = lstEncheres;
-	}
-
 	public Retrait getLieuRetrait() {
 		return lieuRetrait;
 	}
@@ -153,13 +142,13 @@ public class ArticleVendu {
 	public void setLieuRetrait(Retrait lieuRetrait) {
 		this.lieuRetrait = lieuRetrait;
 	}
-
-	public Categorie getCategorieArticle() {
-		return categorieArticle;
+	
+	public List<Enchere> getEncheres(){
+		return encheres;
 	}
-
-	public void setCategorieArticle(Categorie categorieArticle) {
-		this.categorieArticle = categorieArticle;
+	
+	public void setEncheres(List<Enchere> lst) {
+		this.encheres = lst;
 	}
 
 	@Override
@@ -167,8 +156,8 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", categorie="
 				+ categorie + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatvente=" + etatVente
-				+ ", vendeur=" + vendeur + ", lstEncheres=" + lstEncheres + ", lieuRetrait=" + lieuRetrait
-				+ ", categorieArticle=" + categorieArticle + "]";
+				+ ", vendeur=" + vendeur + ", lieuRetrait=" + lieuRetrait
+				+ "]";
 		//TODO Vérifier si problème StackOverflow (boucle infinie)
 	}
 
