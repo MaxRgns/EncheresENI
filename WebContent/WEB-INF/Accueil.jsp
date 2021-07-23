@@ -403,9 +403,12 @@
 
 								<p class="card-text">
 									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
 								</p>
-
+								<p class="card-text">
+									<small class="text-muted"><a
+										href="Enchere?idArticle=${ArticleVendu.noArticle}">Détails</a></small>
+								</p>
 							</div>
 
 						</div>
@@ -449,7 +452,7 @@
 
 								<p class="card-text">
 									<small class="text-muted">Vendeur : <a
-										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}<!--  remplacer par le pseudo lié à cet id --></a></small>
+										href="Profil?idProfil=${ArticleVendu.vendeur.noUtilisateur}">${ArticleVendu.vendeur.pseudo}</a></small>
 								</p>
 
 							</div>

@@ -48,7 +48,7 @@
 						profil</a>
 				</div>
 				<div class="p-2 bd-highlight">
-					<a href="Login" id="action">Déconnexion</a>
+					<a href="Login?action=logout">Déconnexion</a>
 				</div>
 
 			</div>

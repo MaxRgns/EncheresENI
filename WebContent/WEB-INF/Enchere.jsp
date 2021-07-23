@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -36,7 +35,6 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<c:if test="${sessionScope.user != null }">
 				<div class="d-flex bd-highlight mb-3">
 					<div class="me-auto p-2 bd-highlight">
 						<a href="Accueil"><h1>ENI-Enchères</h1></a>
@@ -55,10 +53,13 @@
 					</div>
 
 				</div>
-			</c:if>
 		</div>
+		<c:set var="now" value="<%=new java.util.Date()%>" />
+		<div class="row d-flex justify-content-center">
+			<h3>Détails de l'article</h3>
+		</div>
+		<p>${enchere.nomArticle} </p>
 	</div>
-
 
 </body>
 </html>
