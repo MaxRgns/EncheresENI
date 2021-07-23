@@ -60,7 +60,7 @@ public class VendreServlet extends HttpServlet {
 		ArticleVendu a = new ArticleVendu();
 		a.setNomArticle(request.getParameter("nom"));
 		a.setDescription(request.getParameter("description"));
-		a.setCategorie(Integer.valueOf(request.getParameter("categorie")));
+		a.setCategorie(catManager.getById(Integer.valueOf(request.getParameter("categorie"))));
 		a.setMiseAPrix(Integer.valueOf(request.getParameter("prix")));
 		a.setDateDebutEncheres(LocalDate.parse(request.getParameter("dateD")));
 		a.setDateFinEncheres(LocalDate.parse(request.getParameter("dateF")));

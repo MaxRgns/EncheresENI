@@ -148,7 +148,7 @@ public class AccueilServlet extends HttpServlet {
 		List<ArticleVendu> retour = new ArrayList<>();
 		for (int i = 0; i < lstAchats.size(); i++) {
 				if (cat > 0) { // Si un filtre de catégorie est actif
-					if (lstAchats.get(i).getCategorie() == cat) {
+					if (lstAchats.get(i).getCategorie().getNoCategorie() == cat) {
 						retour.add(lstAchats.get(i));
 					}
 				} else {
