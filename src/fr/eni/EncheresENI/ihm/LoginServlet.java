@@ -63,7 +63,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("logout");
 		if (request.getSession().getAttribute("user") != null) { // Si le visiteur est connecté à un compte
 			request.getSession().setAttribute("user", null);
 		}
