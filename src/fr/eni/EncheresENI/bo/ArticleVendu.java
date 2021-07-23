@@ -10,7 +10,7 @@ public class ArticleVendu {
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
-	private Integer categorie;
+	private Categorie categorie;
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private String etatVente;
@@ -23,7 +23,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente, Utilisateur vendeur,
+			Categorie categorie, Integer miseAPrix, Integer prixVente, String etatvente, Utilisateur vendeur,
 			Retrait lieuRetrait) {
 		super();
 		this.nomArticle = nomArticle;
@@ -39,7 +39,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, Integer categorie, Integer miseAPrix, Integer prixVente, String etatvente,
+			LocalDate dateFinEncheres, Categorie categorie, Integer miseAPrix, Integer prixVente, String etatvente,
 			Utilisateur vendeur, Retrait lieuRetrait) {
 		super();
 		this.noArticle = noArticle;
@@ -95,11 +95,11 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public Integer getCategorie() {
+	public Categorie getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(Integer categorie) {
+	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.EncheresENI.bo.ArticleVendu;
+import fr.eni.EncheresENI.bo.Categorie;
 import fr.eni.EncheresENI.bo.Enchere;
 import fr.eni.EncheresENI.bo.Retrait;
 import fr.eni.EncheresENI.bo.Utilisateur;
@@ -20,6 +21,7 @@ import fr.eni.EncheresENI.dal.dao.Enchere.EnchereDAO;
 
 public class ArticleDAOImpl implements DAO<ArticleVendu> {
 	private DAO<Utilisateur> daoU = DAOFact.getUtilisateurDAO();
+	private DAO<Categorie> daoC = DAOFact.getCategorieDAO();
 	private EnchereDAO daoE = DAOFact.getEnchereDAO();
 	private static final String INSERT_A = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
 	private static final String INSERT_R = "INSERT INTO RETRAITS VALUES (?,?,?,?)";
@@ -42,7 +44,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
 			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
-			stmt.setInt(8, a.getCategorie());
+			stmt.setInt(8, a.getCategorie().getNoCategorie());
 			int nb = stmt.executeUpdate();
 			if (nb > 0) { // Si la requete a bien recuperee une cle, on l'attribue au nouvel objet
 				ResultSet rsk = stmt.getGeneratedKeys();
@@ -78,7 +80,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			a.setMiseAPrix(rs.getInt("prix_initial"));
 			a.setPrixVente(rs.getInt("prix_vente"));
 			a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
-			a.setCategorie(rs.getInt("no_categorie"));
+			a.setCategorie(daoC.selectById(rs.getInt("no_categorie")));
 
 			// Récupération du lieu de retrait associé
 			PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
@@ -116,7 +118,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setMiseAPrix(rs.getInt("prix_initial"));
 				a.setPrixVente(rs.getInt("prix_vente"));
 				a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
-				a.setCategorie(rs.getInt("no_categorie"));
+				a.setCategorie(daoC.selectById(rs.getInt("no_categorie")));
 				// Récupération du lieu de retrait associé
 				PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
 				stmt2.setInt(1, a.getNoArticle());
@@ -157,7 +159,7 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 			stmt.setInt(5, a.getMiseAPrix());
 			stmt.setInt(6, a.getPrixVente());
 			stmt.setInt(7, a.getVendeur().getNoUtilisateur());
-			stmt.setInt(8, a.getCategorie());
+			stmt.setInt(8, a.getCategorie().getNoCategorie());
 			stmt.setInt(9, a.getNoArticle());
 			stmt.executeUpdate();
 			
