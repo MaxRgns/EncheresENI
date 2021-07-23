@@ -117,8 +117,6 @@ public class ArticleDAOImpl implements DAO<ArticleVendu> {
 				a.setPrixVente(rs.getInt("prix_vente"));
 				a.setVendeur(daoU.selectById(rs.getInt("no_utilisateur")));
 				a.setCategorie(rs.getInt("no_categorie"));
-				
-				System.out.println(a);
 				// Récupération du lieu de retrait associé
 				PreparedStatement stmt2 = connection.prepareStatement(SELECT_R_BY_ID);
 				stmt2.setInt(1, a.getNoArticle());
