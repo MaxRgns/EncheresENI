@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="fr.eni.EncheresENI.bo.Utilisateur"%>
 <%@ page import="fr.eni.EncheresENI.ihm.ProfilModel"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -30,53 +31,113 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 	crossorigin="anonymous"></script>
-<title>ENI-EnchÃ¨res</title>
+<title>ENI-Enchères</title>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="d-flex bd-highlight mb-3">
-				<div class="me-auto p-2 bd-highlight">
-					<a href="Accueil"><h1>ENI-Enchères</h1></a>
+			<c:if test="${sessionScope.user == null }">
+				<div class="d-flex bd-highlight">
+					<div class="me-auto p-2 bd-highlight">
+						<h1>
+							<a href="Accueil">ENI-Enchères</a>
+						</h1>
+					</div>
+					<div class="p-2 bd-highlight">
+						<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire
+							- Se connecter</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Authentification</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="Login">
+											<div class="mb-3">
+												<label for="exampleInputEmail1" class="form-label">Identifiant</label>
+												<input type="text" class="form-control" name="identifiant"
+													id="exampleInput">
+											</div>
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Mot
+													de passe</label> <input type="password" class="form-control"
+													name="pass" id="exampleInputPassword1">
+											</div>
+											<div class="mb-3 form-check">
+												<input type="checkbox" class="form-check-input"
+													id="exampleCheck1"> <label class="form-check-label"
+													for="exampleCheck1">Se souvenir de moi</label> <br> <label
+													for="exampleText" class="form-label"><a href="">Mot
+														de passe oublié ?</a></label>
+											</div>
+											<div class="modal-footer">
+												<a href="Register"><button type="button"
+														class="btn btn-secondary" data-bs-dismiss="modal">S'inscrire</button></a>
+												<button class="btn btn-primary" type="submit" name="action"
+													value="login">Se connecter</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				
-				<div class="p-2 bd-highlight">
-					<a href="">Vendre un article</a>
-				</div>
-				<div class="p-2 bd-highlight">
-					<a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon
-						profil</a>
-				</div>
-				<div class="p-2 bd-highlight">
-					<a href="Login?action=logout">Déconnexion</a>
-				</div>
+			</c:if>
+			<c:if test="${sessionScope.user != null }">
+				<div class="d-flex bd-highlight mb-3">
+					<div class="me-auto p-2 bd-highlight">
+						<a href="Accueil"><h1>ENI-Enchères</h1></a>
+					</div>
 
-			</div>
-		
+
+					<div class="p-2 bd-highlight">
+						<a href="Vendre">Vendre un article</a>
+					</div>
+					<div class="p-2 bd-highlight">
+						<a href="Profil?idProfil=${user.noUtilisateur}" id="profil">Mon
+							profil</a>
+					</div>
+					<div class="p-2 bd-highlight">
+						<a href="Login?action=logout">Déconnexion</a>
+					</div>
+
+				</div>
+			</c:if>
+
 			<div class="row d-flex justify-content-center">
-				
+
 				<div class="col-12 col-sm-6">
-				<h3>Profil de ${profil.utilisateur.pseudo}</h3><br>
-					<label>Nom : ${profil.utilisateur.nom}</label> <br><br>
-					<label>Prénom : ${profil.utilisateur.prenom}</label> <br>
+					<h3>Profil de ${profil.utilisateur.pseudo}</h3>
+					<br> <label>Nom : ${profil.utilisateur.nom}</label> <br>
+					<br> <label>Prénom : ${profil.utilisateur.prenom}</label> <br>
 					<br> <label>E-mail : ${profil.utilisateur.email}</label> <br>
-					<br> <label>Téléphone : ${profil.utilisateur.telephone}</label> <br>
-					<br> <label>Adresse : ${profil.utilisateur.rue}, 
-						${profil.utilisateur.codepostal} à
-						${profil.utilisateur.ville}</label> <br><br>
-						<c:if
+					<br> <label>Téléphone :
+						${profil.utilisateur.telephone}</label> <br> <br> <label>Adresse
+						: ${profil.utilisateur.rue}, ${profil.utilisateur.codepostal} à
+						${profil.utilisateur.ville}</label> <br>
+					<br>
+					<c:if
 						test="${profil.utilisateur.noUtilisateur == user.noUtilisateur}">
-						<label>Crédit : ${user.credit}</label><br><br><br>
+						<label>Crédit : ${user.credit}</label>
+						<br>
+						<br>
+						<br>
 						<div class="d-flex justify-content-between">
 							<form action="Edit">
 								<input class="btn btn-primary" type="submit" value="Modifier">
 							</form>
 						</div>
-						
+
 					</c:if>
-				</div>	
+				</div>
 			</div>
-			
+
 		</div>
 	</div>
 
